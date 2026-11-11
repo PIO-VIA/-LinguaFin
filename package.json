@@ -1,0 +1,21 @@
+{
+  "name": "mboa-hackathon",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test mboa/tests/unit.test.mjs",
+    "e2e": "node mboa/tests/e2e.mjs",
+    "e2e:local": "node mboa/tests/e2e-local.mjs",
+    "lint:firefox": "web-ext lint --source-dir mboa --ignore-files \"tests/**\" \"validation/**\" \"docs/**\" \"README.md\"",
+    "e2e:auto": "node mboa/tests/e2e-auto.mjs",
+    "e2e:pages": "node mboa/tests/e2e-pages.mjs",
+    "shield": "node mboa/tests/shield-eval.mjs",
+    "audit:missing": "node mboa/tests/audit-missing.mjs",
+    "demo": "node mboa/tests/demo.mjs",
+    "screens": "node mboa/tests/screens.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.65.0",
+    "web-ext": "10.8.0"
+  }
+}

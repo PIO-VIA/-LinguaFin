@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kola Pay — démo fictive</title>
+  <style>
+    :root { --b:#c2410c; --ink:#1c1917; --muted:#57534e; --line:#e7e5e4; }
+    * { box-sizing: border-box; } body { margin: 0; font: 16px/1.45 system-ui, sans-serif; color: var(--ink); background: #fafaf9; }
+    .bar { background: var(--b); color: #fff; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; }
+    .bar b { font-size: 20px; } .demo { background: #fef3c7; color: #78350f; font-size: 13px; padding: 6px 18px; }
+    main { max-width: 520px; margin: 0 auto; padding: 16px; display: grid; gap: 14px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+    .big { font-size: 30px; font-weight: 800; } .muted { color: var(--muted); font-size: 14px; }
+    label { display: grid; gap: 4px; font-weight: 600; font-size: 14px; margin: 10px 0; }
+    input, select { font: inherit; padding: 10px; border: 1px solid #d6d3d1; border-radius: 10px; }
+    button { font: inherit; font-weight: 700; padding: 12px 16px; border-radius: 12px; border: 0; background: var(--b); color: #fff; cursor: pointer; }
+    button.sec { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+    .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+    .row span:last-child { font-weight: 700; }
+    .sms { border-left: 4px solid #a8a29e; background: #f5f5f4; padding: 10px; border-radius: 8px; margin: 8px 0; font-size: 14px; }
+    .actions { display: flex; gap: 8px; margin-top: 12px; } .err { color: #b91c1c; font-weight: 600; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="bar"><b>Kola Pay</b><span>Mobile Money</span></div>
+  <div class="demo">Démo fictive — aucune transaction réelle.</div>
+  <main>
+    <section class="card" id="home">
+      <div class="muted">Bonjour, Paul Atangana</div>
+      <div>Solde disponible</div>
+      <div class="big" id="bal">85 000 FCFA</div>
+      <div class="actions"><button id="go">Envoyer</button><button class="sec">Historique</button></div>
+    </section>
+
+    <section class="card" id="send" hidden>
+      <h2>Transfert</h2>
+      <label>Destinataire <input id="name" value="Marie Ngono"></label>
+      <label>Numéro du destinataire <input id="phone" value="+237 6 77 88 99 00"></label>
+      <label>Montant <input id="amount" type="number" value="20000"></label>
+      <p class="muted" id="rule">Frais de 1 % (min. 50 FCFA, max. 1 000 FCFA)</p>
+      <div class="row"><span>Frais</span><span id="fee">200 FCFA</span></div>
+      <div class="row"><span>Total</span><span id="total">20 200 FCFA</span></div>
+      <div class="actions"><button class="sec" id="cancel">Annuler</button><button id="next">Valider</button></div>
+    </section>
+
+    <section class="card" id="sum" hidden>
+      <h2>Récapitulatif</h2>
+      <p>Vous allez envoyer <b id="s-amt"></b> à <b id="s-name"></b></p>
+      <div class="row"><span>Montant</span><span id="s-amount"></span></div>
+      <div class="row"><span>Frais</span><span id="s-fee"></span></div>
+      <div class="row"><span>Total</span><span id="s-total"></span></div>
+      <div class="row"><span>Destinataire</span><span id="s-dest"></span></div>
+      <div class="row"><span>Téléphone</span><span id="s-phone"></span></div>
+      <label>Entrez votre code PIN <input type="password" inputmode="numeric" maxlength="4" id="pin" autocomplete="off"></label>
+      <p class="muted">Ne partagez jamais votre code PIN.</p>
+      <div class="actions"><button class="sec" id="back">Retour</button><button id="ok">Confirmer</button></div>
+      <p class="err" id="perr" hidden>Code PIN incorrect</p>
+    </section>
+
+    <section class="card" id="done" hidden>
+      <h2>Transaction réussie</h2>
+      <div class="row"><span>Référence</span><span id="ref">KP-2026-7Q4XZ1</span></div>
+      <button id="again">Nouveau transfert</button>
+    </section>
+
+    <section class="card">
+      <h3>Messages</h3>
+      <div id="inbox"><div class="sms">Votre facture ENEO de 7 500 FCFA a été payée.</div></div>
+    </section>
+  </main>
+  <script>
+    // Banque FICTIVE pour démontrer l'indépendance de Mboa vis-à-vis du service cible.
+    const $ = (s) => document.querySelector(s);
+    const fmt = (n) => Math.round(n).toLocaleString('fr-FR') + ' FCFA';
+    const RULE = { rate: 0.01, min: 50, max: 1000 };
+    let tamper = new URLSearchParams(location.search).get('tamper') === '1';
+    const fee = (a) => Math.min(RULE.max, Math.max(RULE.min, Math.round(a * RULE.rate)));
+    const show = (id) => ['home', 'send', 'sum', 'done'].forEach((x) => ($('#' + x).hidden = x !== id));
+    function calc() {
+      const a = Number($('#amount').value) || 0;
+      const f = tamper ? fee(a) * 5 : fee(a);
+      $('#fee').textContent = fmt(f);
+      $('#total').textContent = fmt(a + f);
+      return { a, f };
+    }
+    $('#go').onclick = () => { show('send'); calc(); };
+    $('#amount').oninput = calc;
+    $('#cancel').onclick = () => show('home');
+    $('#next').onclick = () => {
+      const { a, f } = calc();
+      // En mode « tamper », le récapitulatif affiche un montant différent de la saisie.
+      const shownA = tamper ? a * 10 : a;
+      $('#s-amt').textContent = fmt(shownA); $('#s-name').textContent = $('#name').value;
+      $('#s-amount').textContent = fmt(shownA); $('#s-fee').textContent = fmt(f); $('#s-total').textContent = fmt(shownA + f);
+      $('#s-dest').textContent = $('#name').value; $('#s-phone').textContent = $('#phone').value;
+      show('sum');
+    };
+    $('#back').onclick = () => show('send');
+    $('#ok').onclick = () => { if ($('#pin').value.length !== 4) { $('#perr').hidden = false; return; } $('#perr').hidden = true; show('done'); };
+    $('#again').onclick = () => show('home');
+    window.receiveSms = (txt) => { const d = document.createElement('div'); d.className = 'sms'; d.textContent = txt; $('#inbox').prepend(d); };
+    setTimeout(() => window.receiveSms('Félicitations ! Vous avez gagné 250 000 FCFA. Envoyez votre code PIN au +237 6 50 11 22 33 pour recevoir votre lot.'), 2500);
+  </script>
+</body>
+</html>
