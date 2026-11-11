@@ -1,0 +1,267 @@
+/* Styles de la popup LinguaFin : contraste AA, textes >= 14 px, focus clavier visible */
+:root {
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --primary: #0b5d3b;
+  --primary-hover: #08472d;
+  --secondary: #334155;
+  --secondary-hover: #1e293b;
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --border: #cbd5e1;
+  --warn-bg: #fef3c7;
+  --warn-text: #78350f;
+  --warn-border: #d97706;
+  --info-bg: #e0f2fe;
+  --info-text: #0c4a6e;
+  --info-border: #0284c7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 360px;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-main);
+  background-color: var(--bg-body);
+}
+
+.popup-header {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 12px 16px;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.brand-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.host-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brand-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #ecfdf5;
+}
+
+.popup-main {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.section-title {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.control-label {
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.meta-line {
+  margin: 8px 0 0 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.form-field {
+  margin-bottom: 10px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.select-input,
+.text-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: var(--text-main);
+  background-color: #ffffff;
+  border: 1px solid #64748b;
+  border-radius: 6px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-hover);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-icon {
+  min-width: 42px;
+  padding: 6px;
+}
+
+.stats-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stats-list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.quick-input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.quick-result {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background-color: #ecfdf5;
+  border: 1px solid #10b981;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #064e3b;
+}
+
+.alert-box {
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.alert-warn {
+  background-color: var(--warn-bg);
+  color: var(--warn-text);
+  border: 1px solid var(--warn-border);
+}
+
+.alert-info {
+  background-color: var(--info-bg);
+  color: var(--info-text);
+  border: 1px solid var(--info-border);
+}
+
+.alert-box p {
+  margin: 0;
+}
+
+.advanced-section {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.advanced-summary {
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--secondary);
+}
+
+.advanced-body {
+  margin-top: 10px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #d97706;
+  outline-offset: 2px;
+}
+

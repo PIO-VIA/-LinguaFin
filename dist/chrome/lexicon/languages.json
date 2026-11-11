@@ -1,0 +1,57 @@
+[
+  {
+    "code": "fr",
+    "name": "Français",
+    "nativeName": "Français",
+    "status": "validated",
+    "validatedBy": "équipe (langue source)",
+    "script": "Latn",
+    "direction": "ltr"
+  },
+  {
+    "code": "en",
+    "name": "English",
+    "nativeName": "English",
+    "status": "validated",
+    "validatedBy": "équipe (langue source)",
+    "script": "Latn",
+    "direction": "ltr"
+  },
+  {
+    "code": "wes",
+    "name": "Pidgin camerounais",
+    "nativeName": "Cameroon Pidgin",
+    "status": "draft",
+    "validatedBy": "communauté (brouillon)",
+    "script": "Latn",
+    "direction": "ltr"
+  },
+  {
+    "code": "ewo",
+    "name": "Ewondo",
+    "nativeName": "Ewondo",
+    "status": "draft",
+    "validatedBy": "communauté (brouillon)",
+    "script": "Latn",
+    "direction": "ltr"
+  },
+  {
+    "code": "ff",
+    "name": "Fulfulde",
+    "nativeName": "Fulfulde",
+    "status": "draft",
+    "validatedBy": "communauté (brouillon)",
+    "script": "Latn",
+    "direction": "ltr"
+  },
+  {
+    "code": "dua",
+    "name": "Duala",
+    "nativeName": "Duala",
+    "status": "draft",
+    "validatedBy": "communauté (brouillon)",
+    "script": "Latn",
+    "direction": "ltr"
+  }
+]
+

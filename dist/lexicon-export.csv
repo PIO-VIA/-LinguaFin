@@ -1,0 +1,77 @@
+id,kind,critical,fr:text,fr:status,en:text,en:status
+common.banner.simulation,warning,true,SIMULATION - aucune opération réelle,validated,SIMULATION - no real transaction,validated
+common.app.title,label,false,SafiPay Cameroun - Services financiers numériques,validated,SafiPay Cameroon - Digital Financial Services,validated
+common.nav.home,label,false,Connexion,validated,Sign in,validated
+common.nav.account,label,false,Mon compte,validated,My account,validated
+common.nav.transfer,label,false,Envoyer de l'argent,validated,Send money,validated
+common.nav.logout,label,false,Déconnexion,validated,Sign out,validated
+common.nav.back_account,label,false,Retour au compte,validated,Back to account,validated
+common.action.validate,label,false,Valider,validated,Submit,validated
+common.action.continue,label,false,Continuer,validated,Continue,validated
+common.action.confirm,label,true,Confirmer le transfert,validated,Confirm transfer,validated
+common.action.cancel,label,false,Annuler,validated,Cancel,validated
+common.action.modify,label,false,Modifier l'opération,validated,Edit transaction,validated
+common.action.new_transfer,label,false,Nouveau transfert,validated,New transfer,validated
+common.footer.disclaimer,free,false,Application bancaire fictive pour le SAFINUM Innovate Challenge. Aucune donnée réelle n'est traitée.,validated,Fictional banking application for the SAFINUM Innovate Challenge. No real data is processed.,validated
+auth.login.heading,label,false,Accéder à votre espace client,validated,Access your customer space,validated
+auth.login.subtitle,free,false,Connectez-vous pour consulter votre solde et effectuer vos opérations simulées.,validated,Sign in to check your balance and perform simulated transactions.,validated
+auth.login.phone_label,label,false,Numéro de téléphone ou identifiant,validated,Phone number or user ID,validated
+auth.login.phone_placeholder,label,false,Entrez votre numéro de téléphone,validated,Enter your phone number,validated
+auth.login.pin_label,label,true,Code secret (simulation uniquement),validated,Secret PIN code (simulation only),validated
+auth.login.pin_placeholder,label,true,Entrez un code factice,validated,Enter a dummy PIN,validated
+auth.login.submit,label,false,Se connecter,validated,Sign in now,validated
+auth.security.never_share_pin,warning,true,"Avertissement de sécurité : ne partagez jamais votre code secret avec qui que ce soit, même avec un agent.",validated,"Security warning: never share your secret code with anyone, not even with an agent.",validated
+account.balance.title,label,true,Solde disponible,validated,Available balance,validated
+account.balance.sentence,template,true,Votre solde est de {amount},validated,Your balance is {amount},validated
+account.holder.template,template,true,Titulaire du compte : {holder} ({account_id}),validated,Account holder: {holder} ({account_id}),validated
+account.history.heading,template,false,Les {count} dernières opérations,validated,Last {count} transactions,validated
+account.history.col_date,label,false,Date,validated,Date,validated
+account.history.col_description,label,false,Opération,validated,Transaction,validated
+account.history.col_reference,label,false,Référence,validated,Reference,validated
+account.history.col_amount,label,true,Montant,validated,Amount,validated
+account.tx.deposit_agent,template,true,Dépôt en espèces - Agence {location},validated,Cash deposit - {location} Branch,validated
+account.tx.transfer_to,template,true,Transfert envoyé à {beneficiary},validated,Transfer sent to {beneficiary},validated
+account.tx.transfer_from,template,true,Transfert reçu de {sender},validated,Transfer received from {sender},validated
+account.tx.bill_payment,template,true,Paiement facture d'électricité {provider},validated,Electricity bill payment {provider},validated
+account.tx.withdrawal_atm,template,true,Retrait distributeur {location},validated,ATM withdrawal {location},validated
+transfer.form.heading,label,false,Préparer un transfert d'argent,validated,Prepare a money transfer,validated
+transfer.form.intro,free,false,Vous allez envoyer de l'argent vers un compte mobile ou bancaire.,validated,You are about to send money to a mobile or bank account.,validated
+transfer.form.recipient_phone_label,label,true,Numéro de téléphone du bénéficiaire,validated,Recipient's phone number,validated
+transfer.form.recipient_phone_placeholder,label,false,Entrez le numéro de téléphone du bénéficiaire,validated,Enter the recipient's phone number,validated
+transfer.form.recipient_name_label,label,true,Nom complet du bénéficiaire,validated,Recipient's full name,validated
+transfer.form.recipient_name_placeholder,label,false,Entrez le nom du bénéficiaire,validated,Enter the recipient's name,validated
+transfer.form.amount_label,label,true,Montant à envoyer (FCFA),validated,Amount to send (FCFA),validated
+transfer.form.amount_placeholder,label,false,Entrez le montant en FCFA,validated,Enter the amount in FCFA,validated
+transfer.fees.box_title,label,true,Détail des frais et conditions,validated,Fee details and conditions,validated
+transfer.fees.calculated_line,template,true,Frais estimés : {fee} | Total débité : {total},validated,Estimated fee: {fee} | Total debited: {total},validated
+transfer.fees.schedule_rule,template,true,Barème des frais : {rate} du montant envoyé (minimum {min_fee}).,validated,Fee schedule: {rate} of the amount sent (minimum {min_fee}).,validated
+transfer.conditions.daily_limit,template,true,Plafond journalier : {limit},validated,Daily limit: {limit},validated
+transfer.recap.heading,label,true,Récapitulatif avant confirmation,validated,Summary before confirmation,validated
+transfer.recap.summary,template,true,Vous allez envoyer {amount} à {beneficiary}. Frais : {fee}.,validated,You are about to send {amount} to {beneficiary}. Fee: {fee}.,validated
+transfer.recap.full_summary,template,true,Vous allez envoyer {amount} à {beneficiary} ({phone}). Frais : {fee}. Total débité : {total}.,validated,You are about to send {amount} to {beneficiary} ({phone}). Fee: {fee}. Total debited: {total}.,validated
+transfer.recap.label_beneficiary,template,true,Bénéficiaire : {beneficiary} ({phone}),validated,Beneficiary: {beneficiary} ({phone}),validated
+transfer.recap.label_amount,template,true,Montant envoyé : {amount},validated,Amount sent: {amount},validated
+transfer.recap.label_fee,template,true,Frais d'opération : {fee},validated,Transaction fee: {fee},validated
+transfer.recap.label_total,template,true,Total débité : {total},validated,Total debited: {total},validated
+transfer.recap.warning_irreversible,warning,true,Attention : cette opération est irréversible.,validated,Warning: this operation cannot be undone.,validated
+transfer.recap.warning_full,warning,true,Vérifiez le bénéficiaire. Cette opération est irréversible. Ne partagez jamais votre code secret.,validated,Verify the recipient. This operation cannot be undone. Never share your secret code.,validated
+transfer.recap.scam_alert,warning,true,Vigilance contre les arnaques : aucun agent ne vous demandera de transférer de l'argent pour débloquer votre compte.,validated,Beware of scams: no agent will ever ask you to transfer money to unlock your account.,validated
+result.success.heading,label,true,Transfert effectué avec succès,validated,Transfer completed successfully,validated
+result.success.details,template,true,Vous avez envoyé {amount} à {beneficiary} ({phone}). Frais : {fee}. Référence : {ref}.,validated,You have sent {amount} to {beneficiary} ({phone}). Fee: {fee}. Reference: {ref}.,validated
+result.success.new_balance,template,true,Nouveau solde disponible : {amount},validated,New available balance: {amount},validated
+result.error.heading,error,true,L'opération n'a pas pu être effectuée,validated,The transaction could not be completed,validated
+result.error.insufficient_funds,error,true,Erreur : solde insuffisant pour couvrir le montant et les frais de l'opération.,validated,Error: insufficient balance to cover the transaction amount and fee.,validated
+result.error.invalid_phone,error,true,Erreur : le numéro de téléphone du bénéficiaire est invalide.,validated,Error: the recipient's phone number is invalid.,validated
+result.error.limit_exceeded,template,true,Erreur : le montant dépasse le plafond journalier autorisé de {limit}.,validated,Error: the amount exceeds the allowed daily limit of {limit}.,validated
+result.error.session_expired,error,true,Votre session a expiré par mesure de sécurité. Veuillez vous reconnecter.,validated,Your session has expired for security reasons. Please sign in again.,validated
+result.warning.unusual_activity,warning,true,Alerte de sécurité : activité inhabituelle détectée. Vérifiez l'identité du bénéficiaire avant de continuer.,validated,Security alert: unusual activity detected. Verify the recipient's identity before proceeding.,validated
+result.sim.switcher_title,label,false,Outils de démonstration : simuler d'autres états,validated,Demo tools: simulate other states,validated
+result.sim.btn_success,label,false,Afficher succès,validated,Show success,validated
+result.sim.btn_insufficient,label,false,Simuler solde insuffisant,validated,Simulate insufficient balance,validated
+result.sim.btn_invalid_phone,label,false,Simuler numéro invalide,validated,Simulate invalid number,validated
+result.sim.btn_limit,label,false,Simuler plafond dépassé,validated,Simulate limit exceeded,validated
+result.sim.btn_expired,label,false,Simuler session expirée,validated,Simulate expired session,validated
+result.sim.btn_unusual,label,false,Simuler alerte de sécurité,validated,Simulate security alert,validated
+demo.unseen.btn_inject_template,label,false,Simuler un message inédit (maintenance),validated,Simulate an unseen message (maintenance),validated
+demo.unseen.btn_inject_unknown,label,false,Simuler un message inédit hors lexique,validated,Simulate an out-of-lexicon unseen message,validated
+demo.unseen.maintenance_banner,template,false,Maintenance prévue ce soir de {start_time} à {end_time}. Le service sera indisponible.,validated,Scheduled maintenance tonight from {start_time} to {end_time}. The service will be unavailable.,validated
