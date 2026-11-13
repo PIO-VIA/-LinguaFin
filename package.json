@@ -12,7 +12,8 @@
     "shield": "node mboa/tests/shield-eval.mjs",
     "audit:missing": "node mboa/tests/audit-missing.mjs",
     "demo": "node mboa/tests/demo.mjs",
-    "screens": "node mboa/tests/screens.mjs"
+    "screens": "node mboa/tests/screens.mjs",
+    "check:drafts": "node mboa/tests/check-drafts.mjs"
   },
   "devDependencies": {
     "playwright": "1.65.0",

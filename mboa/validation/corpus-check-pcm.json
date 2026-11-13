@@ -1,0 +1,348 @@
+{
+ "lang": "pcm",
+ "corpus": "Common Voice (CC0)",
+ "sentences": 28159,
+ "distinctWords": 4804,
+ "date": "2026-11-13",
+ "report": {
+  "back_hackathon": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "hackathon"
+   ]
+  },
+  "jury": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "jury"
+   ]
+  },
+  "step_fees": {
+   "unknown": [
+    "charges"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "step_confirmation": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "confirmation"
+   ]
+  },
+  "view_fees": {
+   "unknown": [
+    "charges"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "recent_tx": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "transactions"
+   ]
+  },
+  "tx_merchant": {
+   "unknown": [
+    "shop"
+   ],
+   "tone": [],
+   "loan": [
+    "payment"
+   ]
+  },
+  "fees_title": {
+   "unknown": [
+    "charges"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "fees_sub": {
+   "unknown": [
+    "charges"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "free": {
+   "unknown": [
+    "charges"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "total_to_debit": {
+   "unknown": [
+    "comot"
+   ],
+   "tone": [],
+   "loan": [
+    "total"
+   ]
+  },
+  "op_safinum": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "safinum"
+   ]
+  },
+  "fee_rule": {
+   "unknown": [
+    "charges"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "beneficiary_sub": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "details"
+   ]
+  },
+  "summary_sub": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "details"
+   ]
+  },
+  "total_debited": {
+   "unknown": [
+    "comot"
+   ],
+   "tone": [],
+   "loan": [
+    "total"
+   ]
+  },
+  "total": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "total"
+   ]
+  },
+  "reference": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "reference"
+   ]
+  },
+  "operation": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "operation"
+   ]
+  },
+  "status": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "status"
+   ]
+  },
+  "secure_connection": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "connection"
+   ]
+  },
+  "demo_footer": {
+   "unknown": [
+    "demo"
+   ],
+   "tone": [],
+   "loan": [
+    "safinum"
+   ]
+  },
+  "protected": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "protected"
+   ]
+  },
+  "err_amount_zero": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "zero"
+   ]
+  },
+  "err_network": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "network"
+   ]
+  },
+  "err_confirm": {
+   "unknown": [
+    "validate"
+   ],
+   "tone": [],
+   "loan": [
+    "details"
+   ]
+  },
+  "network_error": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "network"
+   ]
+  },
+  "pin_never_share": {
+   "unknown": [
+    "anybody"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "tx_success": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "transaction"
+   ]
+  },
+  "tx_failed": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "transaction"
+   ]
+  },
+  "withdraw": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "withdraw"
+   ]
+  },
+  "validate": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "validate"
+   ]
+  },
+  "messages": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "messages"
+   ]
+  },
+  "service_payment": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "payment"
+   ]
+  },
+  "b_subj_payment": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "payment"
+   ]
+  },
+  "b_subj_withdrawal": {
+   "unknown": [
+    "comot"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_subj_transaction": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "transaction"
+   ]
+  },
+  "b_subj_request": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "request"
+   ]
+  },
+  "b_subj_session": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "connection"
+   ]
+  },
+  "b_pred_pending": {
+   "unknown": [
+    "process"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_pred_refused": {
+   "unknown": [
+    "refuse"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_pred_expires_in_min": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "minutes"
+   ]
+  },
+  "b_pred_debited": {
+   "unknown": [
+    "comot"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_mod_ref": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "reference"
+   ]
+  },
+  "b_mod_by_sms": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "sms"
+   ]
+  },
+  "b_sent_retry_later": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "later"
+   ]
+  },
+  "b_sent_never_share": {
+   "unknown": [
+    "anybody"
+   ],
+   "tone": [],
+   "loan": []
+  }
+ }
+}
