@@ -1,8 +1,8 @@
 {
  "lang": "pcm",
- "corpus": "Common Voice (CC0)",
- "sentences": 28159,
- "distinctWords": 4804,
+ "corpus": "Common Voice 27.0 (CC0) + OPUS MT560 (CC BY 4.0)",
+ "sentences": 29158,
+ "distinctWords": 5019,
  "date": "2026-11-13",
  "report": {
   "back_hackathon": {
@@ -78,9 +78,7 @@
    "loan": []
   },
   "total_to_debit": {
-   "unknown": [
-    "comot"
-   ],
+   "unknown": [],
    "tone": [],
    "loan": [
     "total"
@@ -115,9 +113,7 @@
    ]
   },
   "total_debited": {
-   "unknown": [
-    "comot"
-   ],
+   "unknown": [],
    "tone": [],
    "loan": [
     "total"
@@ -260,13 +256,6 @@
     "payment"
    ]
   },
-  "b_subj_withdrawal": {
-   "unknown": [
-    "comot"
-   ],
-   "tone": [],
-   "loan": []
-  },
   "b_subj_transaction": {
    "unknown": [],
    "tone": [],
@@ -308,13 +297,6 @@
    "loan": [
     "minutes"
    ]
-  },
-  "b_pred_debited": {
-   "unknown": [
-    "comot"
-   ],
-   "tone": [],
-   "loan": []
   },
   "b_mod_ref": {
    "unknown": [],

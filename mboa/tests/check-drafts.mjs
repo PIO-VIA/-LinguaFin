@@ -3,8 +3,10 @@
 // de phrases réelles est suspect : il passe en priorité dans le tableur des validateurs.
 //
 // Usage : node mboa/tests/check-drafts.mjs <langue> <fichier.tsv|.txt> [autres fichiers…]
-//   ex.  node mboa/tests/check-drafts.mjs dua ~/Téléchargements/cv-dua/validated_sentences.tsv
-// Langues : ewo, dua, pcm (Common Voice : ewo, dua, wes).
+//   ex.  node mboa/tests/check-drafts.mjs dua cv-corpus-27.0/dua/validated_sentences.tsv mt560-dua.tsv
+// Langues : ewo, dua, pcm (Common Voice : ewo, dua, wes). Mettre en premier le corpus dont
+// l'écriture suit l'Alphabet général des langues camerounaises (Common Voice) : c'est son
+// orthographe qui est proposée quand seuls les tons / accents diffèrent.
 // Sortie : mboa/validation/corpus-check-<langue>.json (lu par export-validation.mjs) + résumé.
 // Le corpus lui-même n'est ni copié ni redistribué : seules des statistiques de mots sont gardées.
 import fs from 'node:fs'; import vm from 'node:vm'; import path from 'node:path';
@@ -30,22 +32,32 @@ const bare = (w) => norm(w).normalize('NFD').replace(/\p{M}/gu, '').replace(/ɛ/
 const wordsOf = (s) => (s.normalize('NFC').match(/[\p{L}\p{M}'’ʼ-]+/gu) || []).map(norm).map((w) => w.replace(/^['-]+|['-]+$/g, '')).filter((w) => /\p{L}/u.test(w));
 
 // Lecture du corpus : colonne « sentence » d'un TSV Common Voice, sinon une phrase par ligne.
+// Plusieurs fichiers = un seul corpus : un mot n'est « jamais vu » que s'il manque partout.
 const freq = new Map(), freqBare = new Map();
+const formOf = new Map(); // squelette → orthographe la plus fréquente dans le corpus
 let sentences = 0;
+const sources = new Set();
 for (const f of files) {
+  sources.add(/cv-corpus|validated_sentences/.test(f) ? 'Common Voice 27.0 (CC0)' : /mt560|sentences\.tsv$/i.test(f) ? 'OPUS MT560 (CC BY 4.0)' : path.basename(f));
   const lines = fs.readFileSync(f, 'utf8').split(/\r?\n/);
   const head = lines[0].split('\t');
   const col = head.indexOf('sentence');
+  const local = new Map();
   for (const line of lines.slice(col >= 0 ? 1 : 0)) {
     const s = (col >= 0 ? line.split('\t')[col] : line)?.replace(/\s+(\p{M})/gu, '$1'); // marques détachées : « o ̱ » → « o̱ »
     if (!s || !s.trim()) continue;
     sentences++;
     const ws = wordsOf(s);
-    for (const w of ws) { freq.set(w, (freq.get(w) || 0) + 1); freqBare.set(bare(w), (freqBare.get(bare(w)) || 0) + 1); }
+    for (const w of ws) { local.set(w, (local.get(w) || 0) + 1); freq.set(w, (freq.get(w) || 0) + 1); freqBare.set(bare(w), (freqBare.get(bare(w)) || 0) + 1); }
     // Certains corpus coupent un mot après une marque diacritique (« mo̱ ni » pour « mo̱ni ») :
     // on ajoute aussi le mot recollé, comparé seulement sous sa forme squelette.
     for (let i = 0; i + 1 < ws.length; i++) if (/\p{M}$/u.test(ws[i].normalize('NFD'))) { const j = bare(ws[i] + ws[i + 1]); freqBare.set(j, (freqBare.get(j) || 0) + 1); }
   }
+  // Orthographe de référence : la forme la plus fréquente du PREMIER fichier qui contient le mot
+  // (mettre en premier le corpus dont l'écriture est la plus proche de l'officielle).
+  const best = new Map();
+  for (const [w, n] of local) { const b = bare(w); if (!best.has(b) || local.get(best.get(b)) < n) best.set(b, w); }
+  for (const [b, w] of best) if (!formOf.has(b)) formOf.set(b, w);
 }
 
 // Mots du français / de l'anglais sources : un mot identique dans le brouillon est un emprunt
@@ -62,13 +74,13 @@ for (const e of entries) {
     checked++;
     if (freq.has(w)) continue;
     if (srcWords.has(w) || /^(sms|pin|code|otp|frais|bank|service|client|transaction|connexion|confirmer|confirmation|référence|sécurité|bloqué|demande|validée|tournure|brouillon|test|jury)$/.test(w)) { res.loan.push(w); loans++; continue; }
-    if (freqBare.has(bare(w))) { res.tone.push(w); tone++; continue; }
+    if (freqBare.has(bare(w))) { const seen = formOf.get(bare(w)); res.tone.push(seen ? `${w} (corpus : ${seen})` : w); tone++; continue; }
     res.unknown.push(w); unknown++;
   }
   if (res.unknown.length || res.tone.length || res.loan.length) report[e.id] = res;
 }
 
-const out = { lang, corpus: 'Common Voice (CC0)', sentences, distinctWords: freq.size, date: new Date().toISOString().slice(0, 10), report };
+const out = { lang, corpus: [...sources].join(' + '), sentences, distinctWords: freq.size, date: new Date().toISOString().slice(0, 10), report };
 const dest = path.join(root, 'validation', `corpus-check-${lang}.json`);
 fs.writeFileSync(dest, JSON.stringify(out, null, 1));
 const pct = (n) => (checked ? Math.round((100 * n) / checked) : 0) + ' %';

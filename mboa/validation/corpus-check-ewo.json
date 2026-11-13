@@ -1,0 +1,1389 @@
+{
+ "lang": "ewo",
+ "corpus": "Common Voice 27.0 (CC0)",
+ "sentences": 883,
+ "distinctWords": 2095,
+ "date": "2026-11-13",
+ "report": {
+  "brand_tagline": {
+   "unknown": [
+    "internet"
+   ],
+   "tone": [],
+   "loan": [
+    "bank"
+   ]
+  },
+  "test_banner": {
+   "unknown": [
+    "ntíntíŋ",
+    "mɔ́nə"
+   ],
+   "tone": [
+    "nə́ (corpus : nə)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": [
+    "test"
+   ]
+  },
+  "test_protocol": {
+   "unknown": [],
+   "tone": [
+    "mvóé (corpus : mvoe)"
+   ],
+   "loan": [
+    "test"
+   ]
+  },
+  "back_hackathon": {
+   "unknown": [],
+   "tone": [
+    "kǔ (corpus : ku)"
+   ],
+   "loan": [
+    "hackathon"
+   ]
+  },
+  "jury": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "jury"
+   ]
+  },
+  "step_balance": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "step_fees": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "frais"
+   ]
+  },
+  "step_beneficiary": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "kos (corpus : kɔs)"
+   ],
+   "loan": []
+  },
+  "step_summary": {
+   "unknown": [],
+   "tone": [
+    "yěn (corpus : yen)",
+    "mɛ́sɛ̌ (corpus : məsə)"
+   ],
+   "loan": []
+  },
+  "step_confirmation": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "confirmation"
+   ]
+  },
+  "hello_name": {
+   "unknown": [],
+   "tone": [
+    "ámos (corpus : amos)"
+   ],
+   "loan": []
+  },
+  "hello": {
+   "unknown": [],
+   "tone": [
+    "ámos (corpus : amos)"
+   ],
+   "loan": []
+  },
+  "current_account": {
+   "unknown": [
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "account_number": {
+   "unknown": [
+    "nɔ́mbâ",
+    "kɔ́ntə"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "account_number_value": {
+   "unknown": [
+    "nɔ́mbâ",
+    "kɔ́ntə"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "available_balance": {
+   "unknown": [
+    "mɔ́nə",
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "ó (corpus : o)",
+    "nə́ (corpus : nə)"
+   ],
+   "loan": []
+  },
+  "your_account": {
+   "unknown": [
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "overview_sub": {
+   "unknown": [
+    "mɔ́nə",
+    "ntɔ̂ŋ"
+   ],
+   "tone": [
+    "yěn (corpus : yen)",
+    "wɔ́ (corpus : wɔ)",
+    "lóm (corpus : lom)",
+    "nɔ́ŋ (corpus : nɔŋ)"
+   ],
+   "loan": []
+  },
+  "make_transfer": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "view_fees": {
+   "unknown": [],
+   "tone": [
+    "yěn (corpus : yen)"
+   ],
+   "loan": [
+    "frais"
+   ]
+  },
+  "recent_tx": {
+   "unknown": [
+    "mɔ́nə",
+    "ńlóm"
+   ],
+   "tone": [
+    "ó (corpus : o)",
+    "ńtié (corpus : ntie)"
+   ],
+   "loan": []
+  },
+  "tx_merchant": {
+   "unknown": [
+    "mɔ́nə",
+    "ńtɛ̂k"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "tx_salary": {
+   "unknown": [
+    "kɔ́ŋ"
+   ],
+   "tone": [],
+   "loan": [
+    "salaire"
+   ]
+  },
+  "tx_transfer_in": {
+   "unknown": [
+    "mɔ́nə",
+    "kɔ́ŋ"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "tx_electricity": {
+   "unknown": [
+    "courant"
+   ],
+   "tone": [],
+   "loan": [
+    "facture"
+   ]
+  },
+  "fees_title": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "lóm (corpus : lom)"
+   ],
+   "loan": [
+    "frais"
+   ]
+  },
+  "fees_sub": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "tɔ́b (corpus : tob)",
+    "mvóé (corpus : mvoe)",
+    "lóm (corpus : lom)",
+    "ó (corpus : o)",
+    "tálɛ́ (corpus : tale)",
+    "bɔ́ń (corpus : bɔn)"
+   ],
+   "loan": [
+    "frais"
+   ]
+  },
+  "operation_type": {
+   "unknown": [],
+   "tone": [
+    "mvóé (corpus : mvoe)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "amount_to_send": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "ó (corpus : o)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "free": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "frais"
+   ]
+  },
+  "total_to_debit": {
+   "unknown": [
+    "mɔ́nə",
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "mɛ́sɛ̌ (corpus : məsə)",
+    "tɔ́ŋ (corpus : toŋ)"
+   ],
+   "loan": []
+  },
+  "balance_after": {
+   "unknown": [
+    "mɔ́nə",
+    "tíɡ"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "continue": {
+   "unknown": [],
+   "tone": [
+    "kə́ (corpus : kə)",
+    "ásu (corpus : asu)"
+   ],
+   "loan": []
+  },
+  "back": {
+   "unknown": [],
+   "tone": [
+    "kǔ (corpus : ku)"
+   ],
+   "loan": []
+  },
+  "op_safinum": {
+   "unknown": [
+    "kɔ́ntə"
+   ],
+   "tone": [],
+   "loan": [
+    "safinum"
+   ]
+  },
+  "op_safinum_desc": {
+   "unknown": [
+    "mɔ́nə",
+    "ntsɔ́g"
+   ],
+   "tone": [
+    "lóm (corpus : lom)"
+   ],
+   "loan": [
+    "frais"
+   ]
+  },
+  "op_other_bank": {
+   "unknown": [],
+   "tone": [
+    "ɔ́fɛ́ (corpus : ofe)"
+   ],
+   "loan": [
+    "bank"
+   ]
+  },
+  "fee_rule": {
+   "unknown": [
+    "ntɔ́ŋ"
+   ],
+   "tone": [
+    "abwí (corpus : abwi)"
+   ],
+   "loan": [
+    "frais"
+   ]
+  },
+  "beneficiary_sub": {
+   "unknown": [
+    "tilí",
+    "mɔ́nə",
+    "nɔ́mbâ",
+    "mvaé"
+   ],
+   "tone": [
+    "kos (corpus : kɔs)",
+    "yěn (corpus : yen)",
+    "ǒsú (corpus : osu)"
+   ],
+   "loan": [
+    "confirmer"
+   ]
+  },
+  "beneficiary_name": {
+   "unknown": [],
+   "tone": [
+    "dzóé (corpus : dzoe)",
+    "kos (corpus : kɔs)"
+   ],
+   "loan": []
+  },
+  "phone_number": {
+   "unknown": [
+    "nɔ́mbâ"
+   ],
+   "tone": [
+    "fɔ́n (corpus : fon)"
+   ],
+   "loan": []
+  },
+  "transfer_reason": {
+   "unknown": [],
+   "tone": [
+    "ó (corpus : o)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "note_optional": {
+   "unknown": [
+    "kalara"
+   ],
+   "tone": [
+    "nge (corpus : ngə)",
+    "ó (corpus : o)"
+   ],
+   "loan": []
+  },
+  "verify_label": {
+   "unknown": [
+    "nɔ́mbâ"
+   ],
+   "tone": [
+    "yěn (corpus : yen)",
+    "dzóé (corpus : dzoe)",
+    "kos (corpus : kɔs)"
+   ],
+   "loan": []
+  },
+  "new_beneficiary_warn": {
+   "unknown": [
+    "ńlóm",
+    "mɔ́nə",
+    "kɔ́ntə",
+    "nɔ́mbâ",
+    "mvaé"
+   ],
+   "tone": [
+    "ó (corpus : o)",
+    "nyɛ̂ (corpus : nye)",
+    "yěn (corpus : yen)",
+    "ǒsú (corpus : osu)"
+   ],
+   "loan": []
+  },
+  "summary_sub": {
+   "unknown": [
+    "mvaé"
+   ],
+   "tone": [
+    "yěn (corpus : yen)",
+    "mɛ́sɛ̌ (corpus : məsə)",
+    "ǒsú (corpus : osu)"
+   ],
+   "loan": [
+    "confirmer"
+   ]
+  },
+  "amount": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "total_debited": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "mɛ́sɛ̌ (corpus : məsə)",
+    "tɔ́ŋ (corpus : toŋ)"
+   ],
+   "loan": []
+  },
+  "total": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "mɛ́sɛ̌ (corpus : məsə)"
+   ],
+   "loan": []
+  },
+  "phone": {
+   "unknown": [],
+   "tone": [
+    "fɔ́n (corpus : fon)"
+   ],
+   "loan": []
+  },
+  "reference": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "référence"
+   ]
+  },
+  "operation": {
+   "unknown": [],
+   "tone": [
+    "mvóé (corpus : mvoe)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "confirm_label": {
+   "unknown": [
+    "jó",
+    "mvaé"
+   ],
+   "tone": [
+    "mɛ́sɛ̌ (corpus : məsə)",
+    "yɔ́b (corpus : yob)",
+    "nə́ (corpus : nə)"
+   ],
+   "loan": []
+  },
+  "confirm_transfer": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "lóm (corpus : lom)"
+   ],
+   "loan": [
+    "confirmer"
+   ]
+  },
+  "edit": {
+   "unknown": [],
+   "tone": [
+    "sɔ́ŋ (corpus : sɔŋ)"
+   ],
+   "loan": []
+  },
+  "receipt_title": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "kə̌ (corpus : kə)"
+   ],
+   "loan": []
+  },
+  "receipt_sub": {
+   "unknown": [
+    "mɔ́nə",
+    "mvaé"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)",
+    "kə̌ (corpus : kə)"
+   ],
+   "loan": []
+  },
+  "status": {
+   "unknown": [
+    "ńtíŋ"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "success": {
+   "unknown": [
+    "mvaé"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "new_transfer": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "lóm (corpus : lom)",
+    "mfɛ́ (corpus : mfe)"
+   ],
+   "loan": []
+  },
+  "important_message": {
+   "unknown": [
+    "kalara",
+    "nnɛ̂n"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "error_occurred": {
+   "unknown": [],
+   "tone": [
+    "abɛ́ (corpus : abe)"
+   ],
+   "loan": []
+  },
+  "dismiss": {
+   "unknown": [],
+   "tone": [
+    "dzíb (corpus : dzib)"
+   ],
+   "loan": []
+  },
+  "security": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "sécurité"
+   ]
+  },
+  "security_tip": {
+   "unknown": [
+    "ńsɛ̌",
+    "nɔ́mbâ"
+   ],
+   "tone": [
+    "mbú (corpus : mbu)",
+    "yěn (corpus : yen)",
+    "dzóé (corpus : dzoe)",
+    "kos (corpus : kɔs)",
+    "ǒsú (corpus : osu)"
+   ],
+   "loan": [
+    "confirmer"
+   ]
+  },
+  "secure_connection": {
+   "unknown": [
+    "ŋkɔ́ŋ"
+   ],
+   "tone": [],
+   "loan": [
+    "connexion"
+   ]
+  },
+  "demo_footer": {
+   "unknown": [
+    "tilí",
+    "ntíntíŋ"
+   ],
+   "tone": [
+    "ó (corpus : o)",
+    "mɔ̌ (corpus : mɔ)"
+   ],
+   "loan": [
+    "safinum",
+    "pay",
+    "démonstration"
+   ]
+  },
+  "protected": {
+   "unknown": [
+    "ŋkɔ́ŋ"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "err_amount_zero": {
+   "unknown": [
+    "mɔ́nə",
+    "yiɛ́"
+   ],
+   "tone": [
+    "yɔ́b (corpus : yob)"
+   ],
+   "loan": [
+    "zéro"
+   ]
+  },
+  "err_insufficient": {
+   "unknown": [
+    "mɔ́nə",
+    "kɔ́ŋ"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "err_beneficiary": {
+   "unknown": [
+    "tilí",
+    "nɔ́mbâ",
+    "mɔ́nə"
+   ],
+   "tone": [
+    "dzóé (corpus : dzoe)",
+    "kos (corpus : kɔs)"
+   ],
+   "loan": []
+  },
+  "err_security_verify": {
+   "unknown": [
+    "nɔ́mbâ",
+    "mɔ́nə"
+   ],
+   "tone": [
+    "yěn (corpus : yen)",
+    "kos (corpus : kɔs)",
+    "ǒsú (corpus : osu)",
+    "kə́ (corpus : kə)",
+    "ásu (corpus : asu)"
+   ],
+   "loan": []
+  },
+  "err_security_new": {
+   "unknown": [
+    "ńlóm",
+    "mɔ́nə",
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "yěn (corpus : yen)",
+    "ó (corpus : o)",
+    "nyɛ̂ (corpus : nye)"
+   ],
+   "loan": []
+  },
+  "err_network": {
+   "unknown": [
+    "kǒbə́"
+   ],
+   "tone": [
+    "abɛ́ (corpus : abe)",
+    "nə́ (corpus : nə)",
+    "ásu (corpus : asu)",
+    "fɛ́ (corpus : fə)"
+   ],
+   "loan": [
+    "réseau",
+    "service"
+   ]
+  },
+  "err_confirm": {
+   "unknown": [
+    "yiɛ́",
+    "mɔ́nə"
+   ],
+   "tone": [
+    "ó (corpus : o)",
+    "ǒsú (corpus : osu)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": [
+    "confirmer"
+   ]
+  },
+  "security_warning": {
+   "unknown": [],
+   "tone": [
+    "yěn (corpus : yen)"
+   ],
+   "loan": [
+    "sécurité"
+   ]
+  },
+  "network_error": {
+   "unknown": [],
+   "tone": [
+    "abɛ́ (corpus : abe)"
+   ],
+   "loan": [
+    "réseau"
+   ]
+  },
+  "pin_enter": {
+   "unknown": [
+    "tilí"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": [
+    "code",
+    "pin"
+   ]
+  },
+  "pin_never_share": {
+   "unknown": [
+    "kat",
+    "ńsɛ̌"
+   ],
+   "tone": [
+    "ó (corpus : o)",
+    "wɔ́ (corpus : wɔ)",
+    "tegə́ (corpus : təgə)",
+    "mbú (corpus : mbu)"
+   ],
+   "loan": [
+    "code",
+    "pin"
+   ]
+  },
+  "pin_wrong": {
+   "unknown": [
+    "mvaé"
+   ],
+   "tone": [
+    "nə́ (corpus : nə)"
+   ],
+   "loan": [
+    "code",
+    "pin"
+   ]
+  },
+  "tx_success": {
+   "unknown": [
+    "mvaé"
+   ],
+   "tone": [],
+   "loan": [
+    "transaction"
+   ]
+  },
+  "tx_failed": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "transaction"
+   ]
+  },
+  "withdraw": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "vóé (corpus : voe)"
+   ],
+   "loan": []
+  },
+  "deposit": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "tə́lə (corpus : tele)"
+   ],
+   "loan": []
+  },
+  "cancel": {
+   "unknown": [],
+   "tone": [
+    "tébé (corpus : təbə)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "validate": {
+   "unknown": [],
+   "tone": [
+    "kə́ (corpus : kə)",
+    "ásu (corpus : asu)"
+   ],
+   "loan": []
+  },
+  "send": {
+   "unknown": [],
+   "tone": [
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "pay": {
+   "unknown": [
+    "saá"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "confirm": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "confirmer"
+   ]
+  },
+  "history": {
+   "unknown": [
+    "mɔ́nə",
+    "ńlóm"
+   ],
+   "tone": [
+    "ó (corpus : o)",
+    "ńtié (corpus : ntie)"
+   ],
+   "loan": []
+  },
+  "recipient": {
+   "unknown": [],
+   "tone": [
+    "kos (corpus : kɔs)"
+   ],
+   "loan": []
+  },
+  "transfer_title": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "recipient_number": {
+   "unknown": [
+    "nɔ́mbâ"
+   ],
+   "tone": [
+    "fɔ́n (corpus : fon)",
+    "kos (corpus : kɔs)"
+   ],
+   "loan": []
+  },
+  "messages": {
+   "unknown": [
+    "bikalara"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "you_will_send": {
+   "unknown": [],
+   "tone": [
+    "ó (corpus : o)",
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "please_wait": {
+   "unknown": [
+    "ńtɛ̂k"
+   ],
+   "tone": [
+    "bəlɛ́ (corpus : bələ)"
+   ],
+   "loan": []
+  },
+  "retry": {
+   "unknown": [
+    "kǒbə́"
+   ],
+   "tone": [
+    "fɛ́ (corpus : fə)"
+   ],
+   "loan": []
+  },
+  "service_payment": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [],
+   "loan": [
+    "service"
+   ]
+  },
+  "b_subj_transfer": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "b_subj_payment": {
+   "unknown": [
+    "saá",
+    "mɔ́nə"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_subj_withdrawal": {
+   "unknown": [
+    "lɔ̂s",
+    "mɔ́nə"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_subj_deposit": {
+   "unknown": [
+    "mɔ́nə",
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "bə́lə (corpus : bələ)"
+   ],
+   "loan": []
+  },
+  "b_subj_transaction": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "transaction"
+   ]
+  },
+  "b_subj_account": {
+   "unknown": [
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "b_subj_code": {
+   "unknown": [],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": [
+    "code"
+   ]
+  },
+  "b_subj_card": {
+   "unknown": [
+    "kártə"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "b_subj_balance": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "b_subj_request": {
+   "unknown": [],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": [
+    "demande"
+   ]
+  },
+  "b_subj_service": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "service"
+   ]
+  },
+  "b_subj_session": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "connexion"
+   ]
+  },
+  "b_subj_number": {
+   "unknown": [
+    "nɔ́mbâ"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_subj_amount": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_pred_success": {
+   "unknown": [
+    "mvaé"
+   ],
+   "tone": [
+    "bɔ́ (corpus : bɔ)"
+   ],
+   "loan": []
+  },
+  "b_pred_failed": {
+   "unknown": [
+    "mvaé"
+   ],
+   "tone": [
+    "nə́ (corpus : nə)"
+   ],
+   "loan": []
+  },
+  "b_pred_pending": {
+   "unknown": [
+    "ńtɛ̂k"
+   ],
+   "tone": [
+    "nə́ (corpus : nə)"
+   ],
+   "loan": []
+  },
+  "b_pred_cancelled": {
+   "unknown": [],
+   "tone": [
+    "tébé (corpus : təbə)"
+   ],
+   "loan": []
+  },
+  "b_pred_refused": {
+   "unknown": [],
+   "tone": [
+    "kaé (corpus : kae)"
+   ],
+   "loan": []
+  },
+  "b_pred_blocked": {
+   "unknown": [],
+   "tone": [
+    "nə́ (corpus : nə)"
+   ],
+   "loan": [
+    "bloqué"
+   ]
+  },
+  "b_pred_expired": {
+   "unknown": [
+    "ńtɛ̂k",
+    "ŋwé"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_pred_expires_on": {
+   "unknown": [
+    "ńtɛ̂k",
+    "ŋwé"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_pred_expires_in_min": {
+   "unknown": [
+    "ńtɛ̂k",
+    "ŋwé",
+    "minúti"
+   ],
+   "tone": [
+    "ásu (corpus : asu)"
+   ],
+   "loan": []
+  },
+  "b_pred_insufficient": {
+   "unknown": [],
+   "tone": [
+    "nə́ (corpus : nə)",
+    "tɛ̂lɛ (corpus : tele)"
+   ],
+   "loan": []
+  },
+  "b_pred_invalid": {
+   "unknown": [
+    "mvaé"
+   ],
+   "tone": [
+    "nə́ (corpus : nə)"
+   ],
+   "loan": []
+  },
+  "b_pred_unavailable": {
+   "unknown": [
+    "ńtɛ̂k"
+   ],
+   "tone": [
+    "nə́ (corpus : nə)",
+    "ŋɔ (corpus : ngɔ)"
+   ],
+   "loan": []
+  },
+  "b_pred_sent": {
+   "unknown": [],
+   "tone": [
+    "lóm (corpus : lom)"
+   ],
+   "loan": []
+  },
+  "b_pred_received": {
+   "unknown": [
+    "kɔ́ŋ"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_pred_credited": {
+   "unknown": [
+    "kɔ́ŋ",
+    "mɔ́nə"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_pred_debited": {
+   "unknown": [
+    "lɔ̂s",
+    "kɔ́ntə"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_pred_updated": {
+   "unknown": [],
+   "tone": [
+    "sɔ́ŋ (corpus : sɔŋ)"
+   ],
+   "loan": []
+  },
+  "b_pred_required": {
+   "unknown": [
+    "nnɛ̂n"
+   ],
+   "tone": [
+    "nə́ (corpus : nə)"
+   ],
+   "loan": []
+  },
+  "b_mod_to_phone": {
+   "unknown": [
+    "nɔ́mbâ"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_mod_from_name": {
+   "unknown": [],
+   "tone": [
+    "ńtɔ́ (corpus : ntɔ)"
+   ],
+   "loan": []
+  },
+  "b_mod_from_phone": {
+   "unknown": [
+    "nɔ́mbâ"
+   ],
+   "tone": [
+    "ńtɔ́ (corpus : ntɔ)"
+   ],
+   "loan": []
+  },
+  "b_mod_ref": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "référence"
+   ]
+  },
+  "b_mod_on_account": {
+   "unknown": [
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "b_mod_from_account": {
+   "unknown": [
+    "kɔ́ntə"
+   ],
+   "tone": [
+    "ńtɔ́ (corpus : ntɔ)",
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "b_mod_today": {
+   "unknown": [],
+   "tone": [
+    "ána (corpus : ana)"
+   ],
+   "loan": []
+  },
+  "b_mod_for_now": {
+   "unknown": [
+    "ńtɛ̂k"
+   ],
+   "tone": [
+    "ŋɔ (corpus : ngɔ)"
+   ],
+   "loan": []
+  },
+  "b_mod_low_balance": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "wɔ́ (corpus : wɔ)",
+    "nə́ (corpus : nə)",
+    "tɛ̂lɛ (corpus : tele)"
+   ],
+   "loan": []
+  },
+  "b_mod_successfully": {
+   "unknown": [
+    "mvaé"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_mod_within_hours": {
+   "unknown": [],
+   "tone": [
+    "ásu (corpus : asu)",
+    "awóla (corpus : awɔla)"
+   ],
+   "loan": []
+  },
+  "b_mod_by_sms": {
+   "unknown": [],
+   "tone": [],
+   "loan": [
+    "sms"
+   ]
+  },
+  "b_sent_retry_later": {
+   "unknown": [
+    "kǒbə́"
+   ],
+   "tone": [
+    "fɛ́ (corpus : fə)",
+    "ǒsú (corpus : osu)"
+   ],
+   "loan": []
+  },
+  "b_sent_retry": {
+   "unknown": [
+    "kǒbə́"
+   ],
+   "tone": [
+    "fɛ́ (corpus : fə)"
+   ],
+   "loan": []
+  },
+  "b_sent_contact": {
+   "unknown": [],
+   "tone": [
+    "lóŋ (corpus : loŋ)"
+   ],
+   "loan": [
+    "service",
+    "client"
+   ]
+  },
+  "b_sent_check_balance": {
+   "unknown": [
+    "mɔ́nə"
+   ],
+   "tone": [
+    "yěn (corpus : yen)",
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": []
+  },
+  "b_sent_check_number": {
+   "unknown": [
+    "nɔ́mbâ"
+   ],
+   "tone": [
+    "yěn (corpus : yen)"
+   ],
+   "loan": []
+  },
+  "b_sent_never_share": {
+   "unknown": [],
+   "tone": [
+    "ó (corpus : o)",
+    "vé (corpus : və)",
+    "wɔ́ (corpus : wɔ)"
+   ],
+   "loan": [
+    "code"
+   ]
+  },
+  "b_sent_attention": {
+   "unknown": [],
+   "tone": [
+    "yěn (corpus : yen)"
+   ],
+   "loan": []
+  },
+  "b_sent_sorry": {
+   "unknown": [
+    "pardon"
+   ],
+   "tone": [],
+   "loan": []
+  },
+  "b_sent_thanks": {
+   "unknown": [
+    "akíba"
+   ],
+   "tone": [],
+   "loan": []
+  }
+ }
+}

@@ -70,6 +70,11 @@ main.js ─► money.extractFacts() : libellés reconnus PAR LEUR SENS → valeu
 3. Test d'écoute avec cinq utilisateurs cibles : une compréhension inférieure à 4/5 la fait passer « à revoir ».
 4. Traçabilité : le nom du validateur et la date sont enregistrés, et le pack exporté sert de preuve.
 5. Garde-fous automatiques : le Studio refuse toute traduction qui perd un emplacement de valeur ou ajoute un chiffre.
+6. Contrôle contre de vrais textes (`npm run check:drafts`) : chaque mot des brouillons est cherché dans des phrases
+   écrites par des locuteurs — Common Voice 27.0 (CC0 ; Ewondo 883, Duala 1 003, Pidgin 999 phrases) et OPUS MT560
+   (CC BY 4.0 ; Duala, Pidgin). Mots jamais vus : Ewondo 26 %, Duala 7 %, Pidgin 2 % ; ils passent en priorité dans
+   les tableurs des validateurs (`validation/PISTES_CORPUS.md`). Seules des statistiques sont gardées : les corpus ne
+   sont ni copiés dans le projet ni redistribués, et l'audio n'est pas utilisé.
 
 ## 6. Dépendances déclarées
 
