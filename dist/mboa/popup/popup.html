@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mboa</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <span class="mark" aria-hidden="true">M</span>
+    <div><h1>Mboa</h1><p>Ta banque dans ta langue</p></div>
+  </header>
+  <main>
+    <h2 id="l-lang">Langue</h2>
+    <div class="langs" role="radiogroup" aria-labelledby="l-lang"></div>
+    <div class="actions">
+      <button id="panel" class="primary" data-icon="languages">Ouvrir le panneau sur la page</button>
+      <button id="read" data-icon="volume">Lire la page</button>
+      <button id="studio" data-icon="book">Studio linguistique</button>
+    </div>
+    <p class="privacy" data-icon="lock">100 % hors ligne. Aucune donnée affichée n'est collectée, stockée ni transmise.</p>
+    <p class="keys">Raccourcis : <kbd>Alt</kbd>+<kbd>Maj</kbd>+<kbd>M</kbd> panneau · <kbd>L</kbd> lire · <kbd>O</kbd> original</p>
+  </main>
+  <script src="../src/core/ns.js"></script>
+  <script src="../src/core/icons.js"></script>
+  <script src="../src/core/entities.js"></script>
+  <script src="../src/packs/phrases.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

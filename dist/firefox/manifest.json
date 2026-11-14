@@ -1,47 +1,84 @@
 {
   "manifest_version": 3,
-  "name": "LinguaFin",
+  "name": "Mboa — ta banque dans ta langue",
+  "short_name": "Mboa",
   "version": "0.1.0",
-  "description": "Rend les services financiers numériques compréhensibles dans d'autres langues, sans modifier leur code.",
+  "description": "Rend les services financiers en ligne compréhensibles en Ewondo, Duala, Fulfulde et Pidgin. Montants verrouillés, calculs vérifiés, bouclier anti-arnaque, voix. 100 % hors ligne.",
   "permissions": [
     "storage",
-    "activeTab",
-    "scripting",
-    "tabs"
+    "unlimitedStorage"
   ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ]
+  },
   "action": {
+    "default_title": "Mboa",
     "default_popup": "popup/popup.html",
-    "default_title": "LinguaFin"
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "js": [
-        "content/index.js"
-      ],
       "run_at": "document_idle",
-      "all_frames": true
+      "all_frames": false,
+      "js": [
+        "src/core/ns.js",
+        "src/core/icons.js",
+        "src/core/entities.js",
+        "src/core/detect.js",
+        "src/packs/phrases.js",
+        "src/packs/blocks.js",
+        "src/core/engine.js",
+        "src/core/money.js",
+        "src/core/shield.js",
+        "src/content/dom.js",
+        "src/content/voice.js",
+        "src/content/ui.js",
+        "src/content/main.js"
+      ]
     }
   ],
-  "icons": {
-    "16": "icons/16.png",
-    "32": "icons/32.png",
-    "48": "icons/48.png",
-    "128": "icons/128.png"
+  "commands": {
+    "toggle-panel": {
+      "suggested_key": {
+        "default": "Alt+Shift+M"
+      },
+      "description": "Ouvrir / fermer le panneau Mboa"
+    },
+    "read-page": {
+      "suggested_key": {
+        "default": "Alt+Shift+L"
+      },
+      "description": "Lire la page à voix haute"
+    },
+    "toggle-original": {
+      "suggested_key": {
+        "default": "Alt+Shift+O"
+      },
+      "description": "Basculer traduction / original"
+    }
   },
-  "background": {
-    "scripts": [
-      "background.js"
-    ]
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "linguafin@example.org",
+      "id": "mboa@safinum-hackathon",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": [

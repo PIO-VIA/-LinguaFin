@@ -1,177 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinguaFin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mboa</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <header class="popup-header">
-    <div class="brand-row">
-      <h1 id="ui-title" class="brand-title">LinguaFin</h1>
-      <span id="host-badge" class="host-badge">localhost</span>
-    </div>
-    <p id="ui-subtitle" class="brand-subtitle">Adaptation linguistique sécurisée</p>
+  <header>
+    <span class="mark" aria-hidden="true">M</span>
+    <div><h1>Mboa</h1><p>Ta banque dans ta langue</p></div>
   </header>
-
-  <main class="popup-main">
-    <!-- Message d'aide si le content script ne répond pas (page système ou permission Firefox) -->
-    <div id="help-banner" class="alert-box alert-info" role="alert" style="display: none;">
-      <p id="ui-help-text">
-        Impossible d'analyser cet onglet. Sur Firefox, vérifiez que l'accès au site est autorisé dans about:addons &gt; LinguaFin &gt; Permissions.
-      </p>
+  <main>
+    <h2 id="l-lang">Langue</h2>
+    <div class="langs" role="radiogroup" aria-labelledby="l-lang"></div>
+    <div class="actions">
+      <button id="panel" class="primary" data-icon="languages">Ouvrir le panneau sur la page</button>
+      <button id="read" data-icon="volume">Lire la page</button>
+      <button id="studio" data-icon="book">Studio linguistique</button>
     </div>
-
-    <!-- Bandeau d'avertissement si la langue cible n'est pas validée -->
-    <div id="unvalidated-banner" class="alert-box alert-warn" role="status" style="display: none;">
-      <strong id="ui-unvalidated-text">Traduction non validée : vérifiez toujours les informations affichées.</strong>
-    </div>
-
-    <!-- Activation sur le site courant -->
-    <section class="section-card">
-      <div class="control-row">
-        <label id="ui-enable-host-label" for="toggle-host-enabled" class="control-label">
-          Activer sur ce site
-        </label>
-        <input type="checkbox" id="toggle-host-enabled" class="checkbox-input">
-      </div>
-      <p id="ui-detected-lang" class="meta-line">Page détectée : —</p>
-    </section>
-
-    <!-- Choix du mode et de la langue cible -->
-    <section class="section-card">
-      <div class="form-field">
-        <label id="ui-mode-label" for="select-mode">Mode de choix de langue</label>
-        <select id="select-mode" class="select-input">
-          <option id="ui-mode-auto" value="auto">Automatique (FR ↔ EN)</option>
-          <option id="ui-mode-manual" value="manual">Manuel</option>
-        </select>
-      </div>
-
-      <div class="form-field">
-        <label id="ui-target-lang-label" for="select-target-lang">Langue cible</label>
-        <select id="select-target-lang" class="select-input"></select>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" id="btn-toggle-view" class="btn btn-primary">
-          Voir l'original
-        </button>
-      </div>
-    </section>
-
-    <!-- Compteurs de transparence et sécurité -->
-    <section class="section-card" aria-labelledby="ui-counters-heading">
-      <h2 id="ui-counters-heading" class="section-title">État de la page</h2>
-      <ul class="stats-list">
-        <li>
-          <span id="ui-stat-translated-label">Segments traduits :</span>
-          <strong id="stat-translated">0</strong>
-        </li>
-        <li>
-          <span id="ui-stat-unchanged-label">Conservés tels quels (sécurité) :</span>
-          <strong id="stat-unchanged">0</strong>
-        </li>
-        <li>
-          <span id="ui-stat-fallback-label">Repli sécurité (original) :</span>
-          <strong id="stat-fallback">0</strong>
-        </li>
-      </ul>
-
-      <div class="control-row" style="margin-top: 10px;">
-        <label id="ui-show-badge-label" for="toggle-show-badge" class="control-label">
-          Afficher la pastille sur la page
-        </label>
-        <input type="checkbox" id="toggle-show-badge" class="checkbox-input" checked>
-      </div>
-    </section>
-
-    <!-- Mini traducteur rapide (Section 5.9 / Phase 5b) -->
-    <section class="section-card" aria-labelledby="ui-quick-heading">
-      <h2 id="ui-quick-heading" class="section-title">Traducteur rapide</h2>
-      <div class="form-field">
-        <label id="ui-quick-input-label" for="quick-input">Saisissez une phrase (FR ou EN)</label>
-        <div class="quick-input-row">
-          <input
-            type="text"
-            id="quick-input"
-            class="text-input"
-            placeholder="Ex. Votre solde est de 25 000 FCFA"
-          >
-          <button
-            type="button"
-            id="btn-voice-input"
-            class="btn btn-secondary btn-icon"
-            style="display: none;"
-            aria-label="Dicter au microphone"
-            title="Dicter au microphone"
-          >
-            🎤
-          </button>
-        </div>
-      </div>
-      <button type="button" id="btn-quick-translate" class="btn btn-secondary btn-full">
-        Traduire le texte saisi
-      </button>
-      <div id="quick-result-box" class="quick-result" aria-live="polite" style="display: none;"></div>
-    </section>
-
-    <!-- Section avancée repliée (Serveur modèle préconçu + fournisseur distant opt-in + debug) -->
-    <details class="advanced-section">
-      <summary id="ui-advanced-summary" class="advanced-summary">Options avancées</summary>
-      <div class="advanced-body">
-        <div class="control-row">
-          <label id="ui-model-server-enable-label" for="toggle-model-server-enabled" class="control-label">
-            Utiliser le serveur du modèle préconçu
-          </label>
-          <input type="checkbox" id="toggle-model-server-enabled" class="checkbox-input">
-        </div>
-
-        <div class="form-field" style="margin-top: 8px;">
-          <label id="ui-model-server-url-label" for="input-model-server-url">URL du serveur du modèle</label>
-          <input
-            type="url"
-            id="input-model-server-url"
-            class="text-input"
-            placeholder="http://localhost:8000/api/translate"
-          >
-        </div>
-
-        <div class="control-row" style="margin-top: 10px;">
-          <label id="ui-remote-enable-label" for="toggle-remote-enabled" class="control-label">
-            Activer le service distant (segments non critiques)
-          </label>
-          <input type="checkbox" id="toggle-remote-enabled" class="checkbox-input">
-        </div>
-
-        <div class="form-field" style="margin-top: 8px;">
-          <label id="ui-remote-url-label" for="input-remote-url">URL du service (LibreTranslate)</label>
-          <input
-            type="url"
-            id="input-remote-url"
-            class="text-input"
-            placeholder="http://localhost:5000/translate"
-          >
-        </div>
-
-        <div id="remote-warning-box" class="alert-box alert-warn" style="margin-top: 8px;">
-          <span id="ui-remote-warning-text">
-            Le texte (sans valeurs sensibles) sera envoyé à &lt;URL non définie&gt;.
-          </span>
-        </div>
-
-        <div class="control-row" style="margin-top: 10px;">
-          <label id="ui-debug-label" for="toggle-debug" class="control-label">
-            Mode diagnostic (compteurs internes)
-          </label>
-          <input type="checkbox" id="toggle-debug" class="checkbox-input">
-        </div>
-      </div>
-    </details>
+    <p class="privacy" data-icon="lock">100 % hors ligne. Aucune donnée affichée n'est collectée, stockée ni transmise.</p>
+    <p class="keys">Raccourcis : <kbd>Alt</kbd>+<kbd>Maj</kbd>+<kbd>M</kbd> panneau · <kbd>L</kbd> lire · <kbd>O</kbd> original</p>
   </main>
-
+  <script src="../src/core/ns.js"></script>
+  <script src="../src/core/icons.js"></script>
+  <script src="../src/core/entities.js"></script>
+  <script src="../src/packs/phrases.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
-

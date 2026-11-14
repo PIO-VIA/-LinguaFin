@@ -17,3 +17,4 @@ try {
   console.error('❌ Échec de la compilation du PDF :', err);
   process.exit(1);
 }
+

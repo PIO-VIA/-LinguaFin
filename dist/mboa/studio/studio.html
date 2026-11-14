@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio linguistique Mboa</title>
+  <link rel="stylesheet" href="studio.css">
+</head>
+<body>
+  <header class="top">
+    <span class="mark" aria-hidden="true">M</span>
+    <div><h1>Studio linguistique Mboa</h1><p>Relire, corriger, valider et enregistrer à voix haute chaque phrase — par des locuteurs natifs.</p></div>
+  </header>
+
+  <main>
+    <section class="card controls" aria-label="Paramètres de validation">
+      <label>Langue
+        <select id="lang"></select>
+      </label>
+      <label>Nom du / de la validateur·rice
+        <input id="validator" autocomplete="off" placeholder="ex. Marie Ngono (locutrice native, Mfou)">
+      </label>
+      <label>Afficher
+        <select id="filter">
+          <option value="all">Toutes les phrases</option>
+          <option value="draft">À valider</option>
+          <option value="review">À revoir</option>
+          <option value="validated">Validées</option>
+        </select>
+      </label>
+      <div class="progress" aria-live="polite"><div class="bar"><span id="bar"></span></div><span id="ptext"></span></div>
+      <div class="btns">
+        <button id="export" data-icon="download">Exporter le pack validé (JSON)</button>
+        <label class="file" data-icon="upload">Importer un pack (JSON)<input id="import" type="file" accept="application/json"></label>
+        <label class="file" data-icon="upload">Importer une feuille de validation (CSV)<input id="importCsv" type="file" accept=".csv,text/csv"></label>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="t-test">
+      <h2 id="t-test">Tester une phrase inédite</h2>
+      <p class="hint">Collez n'importe quel message : le moteur montre les valeurs verrouillées, l'intention détectée, la sortie et le verdict d'intégrité.</p>
+      <textarea id="probe" rows="2">Votre transfert de 15 000 FCFA vers Paul Atangana (+237 6 77 88 99 00) a échoué. Réessayez.</textarea>
+      <div id="probeOut" class="probe" aria-live="polite"></div>
+    </section>
+
+    <section class="card" aria-labelledby="t-list">
+      <h2 id="t-list">Mémoire de phrases</h2>
+      <p class="hint">Les emplacements <code>{0}</code>, <code>{1}</code>… sont les valeurs verrouillées (montants, noms, numéros). Ils doivent rester présents, une seule fois chacun, et aucun chiffre ne doit être ajouté.</p>
+      <div id="rows" class="rows"></div>
+    </section>
+
+    <section class="card method" aria-labelledby="t-method">
+      <h2 id="t-method">Méthode de validation linguistique</h2>
+      <ol>
+        <li><b>Double relecture native</b> : deux locuteur·rice·s natif·ve·s par langue relisent chaque phrase indépendamment ; une phrase passe « validée » seulement si les deux sont d'accord.</li>
+        <li><b>Rétro-traduction</b> : un troisième locuteur retraduit oralement vers le français, sans voir l'original ; tout écart de sens sur une action (envoyer, confirmer, annuler), un montant ou une alerte = phrase « à revoir ».</li>
+        <li><b>Test terrain</b> : 5 utilisateurs cibles écoutent la version audio et doivent dire ce qu'ils vont faire ; compréhension &lt; 4/5 = « à revoir ».</li>
+        <li><b>Traçabilité</b> : chaque validation enregistre le nom du validateur et la date ; le pack exporté sert de preuve.</li>
+        <li><b>Garde-fous automatiques</b> : le Studio refuse toute traduction qui perd un emplacement de valeur ou ajoute un chiffre.</li>
+      </ol>
+    </section>
+  </main>
+
+  <script src="../src/core/ns.js"></script>
+  <script src="../src/core/icons.js"></script>
+  <script src="../src/core/entities.js"></script>
+  <script src="../src/core/detect.js"></script>
+  <script src="../src/packs/phrases.js"></script>
+  <script src="../src/packs/blocks.js"></script>
+  <script src="../src/core/engine.js"></script>
+  <script src="../src/core/shield.js"></script>
+  <script src="studio.js"></script>
+</body>
+</html>

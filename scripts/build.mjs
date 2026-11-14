@@ -125,3 +125,4 @@ Archives ZIP (prêtes à soumettre ou distribuer) :
   - dist/mboa-firefox.zip
   - dist/mboa-universel.zip
 `);
+
