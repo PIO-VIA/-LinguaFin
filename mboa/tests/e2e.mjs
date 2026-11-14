@@ -69,7 +69,7 @@ await juryBtn(/Vérifier l.étape maintenant/).click();
 await page.waitForTimeout(300);
 
 // 3. Bénéficiaire.
-await page.locator('button').filter({ hasText: /Kə́ ásu|Kɛ́ ɓosó|Jokku|^Continue$|Continuer/ }).first().click();
+await page.locator('button').filter({ hasText: /Kə́ ásu|Kɛ́ ɓosó|Jokku|Continue/ }).first().click();
 await page.waitForTimeout(600);
 await page.locator('input[type=checkbox]').first().check();
 await page.waitForTimeout(300);
@@ -77,7 +77,7 @@ await shot('03-beneficiaire');
 const t3 = await bodyText();
 check('Avertissement nouveau bénéficiaire traduit', /Yěn nɔ́mbâ mvaé|Ƴeew limoore|Ene nɔ́mba|Check the number/.test(t3));
 await juryBtn(/Vérifier l.étape maintenant/).click();
-await page.locator('button').filter({ hasText: /Kə́ ásu|Kɛ́ ɓosó|Jokku|^Continue$|Continuer/ }).first().click();
+await page.locator('button').filter({ hasText: /Kə́ ásu|Kɛ́ ɓosó|Jokku|Continue/ }).first().click();
 await page.waitForTimeout(700);
 
 // 4. Récapitulatif : point de contrôle principal.
@@ -98,7 +98,8 @@ await juryBtn(/Vérifier l.étape maintenant/).click();
 await page.waitForTimeout(400);
 
 // 6. Erreurs et alertes déclenchées par le jury.
-for (const b of [/Solde insuffisant|Mɔ́nə wɔ́ mə ayi/, /Alerte de sécurité|YĚN — sécurité|REENU — kisal|Security warning/, /Erreur réseau|Dzam dzi abɛ́ a réseau|Juumre rezo|Network problem/]) {
+// Libellés des boutons du jury dans chaque langue (fr, ewo, fub, dua, pcm).
+for (const b of [/Solde insuffisant|Mɔ́nə wɔ́ mə ayi|Mɔ́ni mwáó ma si|Your money no reach/, /Alerte de sécurité|YĚN — sécurité|REENU — kisal|BƆ́ŊGƆ́ — sécurité|Security warning/, /Erreur réseau|Dzam dzi abɛ́ a réseau|Juumre rezo|Mbaki ya réseau|Network problem/]) {
   await page.locator('button').filter({ hasText: b }).last().click().catch(() => {});
   await page.waitForTimeout(500);
 }
@@ -123,7 +124,7 @@ const alerts = await mboa('.alerts').innerText().catch(() => '');
 check('Bouclier : arnaque injectée signalée', /YĚN|REENU|BƆ́ŊGƆ́|scam|Arnaque/i.test(alerts), alerts.replace(/\s+/g, ' ').slice(0, 160));
 
 // 8. Le jury falsifie les frais : Mboa doit le détecter.
-await juryBtn(/Nouveau transfert|Lóm mɔ́nə mfɛ́|Nelde hesere|New transfer/).click().catch(() => {});
+await juryBtn(/Nouveau transfert|Lóm mɔ́nə mfɛ́|Nelde hesere|Lóma mɔ́ni mɔ́nɛ|New transfer/).click().catch(() => {});
 await page.waitForTimeout(400);
 await page.locator('button').filter({ hasText: /Lóm mɔ́nə|Lóma mɔ́ni|Neldu ceede|Send money/ }).first().click().catch(() => {});
 await page.waitForTimeout(400);
