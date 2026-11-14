@@ -5,10 +5,11 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:pdf": "node scripts/generate_dossier_pdf.mjs",
+    "dossier:pdf": "node scripts/generate_dossier_pdf.mjs",
     "test": "node --test mboa/tests/unit.test.mjs",
     "e2e": "node mboa/tests/e2e.mjs",
     "e2e:local": "node mboa/tests/e2e-local.mjs",
-    "lint:firefox": "web-ext lint --source-dir mboa --ignore-files \"tests/**\" \"validation/**\" \"docs/**\" \"README.md\"",
+    "lint:firefox": "web-ext lint --source-dir mboa --ignore-files \"tests/**\" \"validation/**\" \"docs/**\"",
     "e2e:auto": "node mboa/tests/e2e-auto.mjs",
     "e2e:pages": "node mboa/tests/e2e-pages.mjs",
     "shield": "node mboa/tests/shield-eval.mjs",

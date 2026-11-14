@@ -73,7 +73,7 @@ main.js ─► money.extractFacts() : libellés reconnus PAR LEUR SENS → valeu
 6. Contrôle contre de vrais textes (`npm run check:drafts`) : chaque mot des brouillons est cherché dans des phrases
    écrites par des locuteurs — Common Voice 27.0 (CC0 ; Ewondo 883, Duala 1 003, Pidgin 999 phrases) et OPUS MT560
    (CC BY 4.0 ; Duala, Pidgin). Mots jamais vus : Ewondo 26 %, Duala 7 %, Pidgin 2 % ; ils passent en priorité dans
-   les tableurs des validateurs (`validation/PISTES_CORPUS.md`). Seules des statistiques sont gardées : les corpus ne
+   les tableurs des validateurs. Seules des statistiques sont gardées : les corpus ne
    sont ni copiés dans le projet ni redistribués, et l'audio n'est pas utilisé.
 
 ## 6. Dépendances déclarées
@@ -95,8 +95,7 @@ sans emoji ; typographie IBM Plex Sans si elle est installée, sinon police du s
 clair et sombre ; cibles tactiles de 44 px minimum. Captures : `npm run screens` (dossier `docs/captures/`).
 
 Idées reprises du prototype LinguaFin (équipe, 2026), réécrites dans Mboa : parcours des Shadow DOM ouverts, détection
-locale FR / EN, déclaration Firefox `data_collection_permissions: none`, contrôle `web-ext lint`, procédure Safari
-(`docs/PORTAGE_SAFARI.md`).
+locale FR / EN, déclaration Firefox `data_collection_permissions: none`, contrôle `web-ext lint`.
 Il n'y a **aucun modèle d'IA ni service externe**. La recherche préalable a montré que NLLB-200 ne couvre ni
 l'Ewondo, ni le Duala, ni le Bassa. MMS (Meta) couvre la synthèse vocale du Fulfulde et du Yemba : c'est une piste
 d'évolution, exécutable localement.
