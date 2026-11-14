@@ -52,6 +52,11 @@
   .btn.primary:hover { filter: brightness(1.05); }
   .btn.square { width: 44px; padding: 0; }
   .langs { display: grid; gap: 6px; }
+  .regions { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+  .regions .lbl { width: 100%; font-size: 12px; color: var(--muted); }
+  .chip-r { min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font-size: 13px; }
+  .chip-r:hover { background: var(--raise); }
+  .chip-r[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); font-weight: 600; }
   .lrow { display: flex; min-width: 0; gap: 6px; align-items: stretch; border-radius: var(--r-md); }
   .lrow.speaking { box-shadow: 0 0 0 3px var(--focus); }
   .lang { flex: 1; min-width: 0; overflow: hidden; display: flex; align-items: center; gap: 12px; text-align: left; border: 1px solid var(--line); background: var(--bg);
@@ -167,6 +172,13 @@
   }
 
   const LANGS = ['ewo', 'dua', 'fub', 'pcm', 'fr'];
+  // Langues proposées pour la région choisie : celles de la région + celles parlées partout,
+  // et toujours la langue déjà choisie. Sans région : toutes.
+  const visibleLangs = () => {
+    const r = view.settings.region;
+    if (!r) return LANGS;
+    return LANGS.filter((c) => c === view.lang || M.packs[c].national || (M.packs[c].regions || []).includes(r));
+  };
 
   function renderPanel() {
     const s = view.settings;
@@ -183,8 +195,10 @@
       ${pageLine()}
       <div class="section"><h3 id="mboa-lang-h">${esc(T('language'))}</h3>
         <button class="btn secondary" data-act="hear">${ic('headphones', { size: 18 })}${esc(T('listenLangs'))}</button></div>
+      <div class="regions" role="group" aria-labelledby="mboa-region-h"><span class="lbl" id="mboa-region-h">${esc(T('region'))}</span>
+        ${['', ...M.regions].map((r) => `<button class="chip-r" data-region="${esc(r)}" aria-pressed="${(s.region || '') === r}">${esc(r || T('allRegions'))}</button>`).join('')}</div>
       <div class="langs" role="radiogroup" aria-labelledby="mboa-lang-h">
-        ${LANGS.map(row).join('')}
+        ${visibleLangs().map(row).join('')}
         <div class="lrow"><button class="lang" role="radio" data-lang="off" aria-checked="${view.lang === 'off'}"><span class="radio" aria-hidden="true"></span>
           <span class="txt"><b>${esc(T('off'))}</b></span></button></div>
       </div>
@@ -207,6 +221,7 @@
     P.querySelectorAll('.lang').forEach((b) => (b.onclick = () => view.handlers.setLang(b.dataset.lang)));
     P.querySelectorAll('[data-listen]').forEach((b) => (b.onclick = () => hearOne(b.dataset.listen)));
     P.querySelector('[data-act=hear]').onclick = hearAll;
+    P.querySelectorAll('[data-region]').forEach((b) => (b.onclick = () => view.handlers.setSetting('region', b.dataset.region)));
     P.querySelector('[data-act=read]').onclick = () => view.handlers.readPage();
     P.querySelector('[data-act=stop]').onclick = () => M.voice.stop();
     P.querySelector('[data-act=studio]').onclick = () => view.handlers.openStudio();
@@ -226,7 +241,8 @@
     markSpeaking(null);
   }
   function hearAll() {
-    M.voice.readAll(LANGS.map((c) => ({ ...greeting(c), el: c })), (c) => markSpeaking(c));
+    // Seulement les langues affichées (région choisie) : jamais toute la liste.
+    M.voice.readAll(visibleLangs().map((c) => ({ ...greeting(c), el: c })), (c) => markSpeaking(c));
   }
 
   // Ce que Mboa a compris de la page : langue détectée, traduction automatique ou non, et pourquoi.
@@ -264,9 +280,13 @@
     view.settings = settings;
     view.lang = settings.lang;
     renderFab();
-    const focused = view.root.activeElement?.dataset?.lang || view.root.activeElement?.dataset?.k;
+    const ds = view.root.activeElement?.dataset || {};
+    const focused = ds.lang || ds.k || (ds.region !== undefined ? `region:${ds.region}` : '');
     renderPanel();
-    if (!view.els.panel.hidden && focused) view.els.panel.querySelector(`[data-lang="${focused}"],[data-k="${focused}"]`)?.focus();
+    if (view.els.panel.hidden || !focused) return;
+    const P = view.els.panel;
+    (focused.startsWith('region:') ? [...P.querySelectorAll('[data-region]')].find((b) => b.dataset.region === focused.slice(7))
+      : P.querySelector(`[data-lang="${focused}"],[data-k="${focused}"]`))?.focus();
   }
 
   function renderStats(st) {

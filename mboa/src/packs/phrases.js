@@ -9,26 +9,29 @@
 (() => {
   const M = globalThis.MBOA;
 
+  // Les 10 régions du Cameroun. Chaque langue déclare les siennes (regions) ou se dit parlée partout
+  // (national) : choisir sa région réduit la liste à quelques langues, même quand il y en aura 100.
+  M.regions = ['Adamaoua', 'Centre', 'Est', 'Extrême-Nord', 'Littoral', 'Nord', 'Nord-Ouest', 'Ouest', 'Sud', 'Sud-Ouest'];
   M.packs = {
     fr: {
       name: 'Français', native: 'Français', bcp47: 'fr', voice: 'fr-FR', status: 'source',
-      region: 'Langue officielle', color: '#2563eb', sample: 'Bonjour',
+      region: 'Langue officielle', color: '#2563eb', sample: 'Bonjour', national: true,
     },
     ewo: {
       name: 'Ewondo', native: 'Ewondo', bcp47: 'ewo', voice: 'fr-FR', status: 'validated',
-      region: 'Centre & Sud — langue véhiculaire de Yaoundé', color: '#16a34a', sample: 'Mbəmbə ámos',
+      region: 'Centre & Sud — langue véhiculaire de Yaoundé', color: '#16a34a', sample: 'Mbəmbə ámos', regions: ['Centre', 'Sud'],
     },
     dua: {
       name: 'Duala', native: 'Duálá', bcp47: 'dua', voice: 'fr-FR', status: 'validated',
-      region: 'Littoral — Douala', color: '#0891b2', sample: 'Mbɔ́lɔ́',
+      region: 'Littoral — Douala', color: '#0891b2', sample: 'Mbɔ́lɔ́', regions: ['Littoral'],
     },
     fub: {
       name: 'Fulfulde', native: 'Fulfulde', bcp47: 'fub', voice: 'fr-FR', status: 'validated',
-      region: 'Adamaoua, Nord, Extrême-Nord', color: '#d97706', sample: 'Jam waali',
+      region: 'Adamaoua, Nord, Extrême-Nord', color: '#d97706', sample: 'Jam waali', regions: ['Adamaoua', 'Nord', 'Extrême-Nord'],
     },
     pcm: {
       name: 'Pidgin', native: 'Kamtok (Pidgin)', bcp47: 'wes', voice: 'en-GB', status: 'validated',
-      region: 'Nord-Ouest, Sud-Ouest, Littoral — tout le pays', color: '#9333ea', sample: 'How na?',
+      region: 'Nord-Ouest, Sud-Ouest, Littoral — tout le pays', color: '#9333ea', sample: 'How na?', national: true,
     },
   };
 
@@ -86,6 +89,8 @@
     siteExcluded: { fr: 'Traduction désactivée sur ce site (à votre demande).', ewo: 'Ó nga tébé traduction a site ya.', dua: 'O tímbi traduction o site ni.', fub: 'A daroyii firo e site oo.', pcm: 'You don stop translation for this site.' },
     siteOff:      { fr: 'Ne pas traduire', ewo: 'Ó kóbó ki', dua: 'O túbwa ɓé', fub: 'Wata fir', pcm: 'No translate' },
     listenLangs:  { fr: 'Écouter les langues', ewo: 'Wóg bikóbó', dua: 'Sengane mambo', fub: 'Heɗito ɗemɗe', pcm: 'Hear the languages' },
+    region:       { fr: 'Votre région', ewo: 'Nnam wɔ́', dua: 'Mbóa mwáó', fub: 'Diiwaan maa', pcm: 'Your region' },
+    allRegions:   { fr: 'Toutes', ewo: 'Mɛ́sɛ̌', dua: 'Ɓɛ́sɛ̃', fub: 'Fuu', pcm: 'All' },
     close:        { fr: 'Fermer', ewo: 'Díb', dua: 'Díba', fub: 'Uddu', pcm: 'Close' },
     collapse:     { fr: 'Réduire ou agrandir', ewo: 'Nnɛ̂n ai ńtɛ̂k', dua: 'Ndé na ɓúkí', fub: 'Ustu walla ɓeydu', pcm: 'Make am small or big' },
     validated:    { fr: 'Validé', ewo: 'Mvaé', dua: 'Bwam', fub: 'Tabbitinaama', pcm: 'Checked' },

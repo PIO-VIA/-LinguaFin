@@ -112,6 +112,19 @@ await page.waitForTimeout(600);
 t = await text();
 check('Bascule « Original » : texte français restauré', /Solde disponible/.test(t) && /Bonjour, Paul Atangana/.test(t));
 
+// D. Choix par région : la liste se réduit aux langues de la région + celles parlées partout.
+const hostEl = (s) => page.locator('#mboa-host').locator(s);
+await hostEl('.fab').click();
+await page.waitForTimeout(200);
+await hostEl('[data-region="Littoral"]').click();
+await page.waitForTimeout(300);
+const rows = await hostEl('.lrow[data-row]').evaluateAll((els) => els.map((e) => e.dataset.row).join(','));
+check('Région « Littoral » : seulement Duala, Pidgin, Français', rows === 'dua,pcm,fr', rows);
+await hostEl('[data-region=""]').click();
+await page.waitForTimeout(300);
+const all = await hostEl('.lrow[data-row]').count();
+check('Région « Toutes » : liste complète', all === 5, String(all));
+
 check('Aucune erreur JavaScript', errors.length === 0, errors.slice(0, 3).join(' | '));
 await ctx.close();
 server.close();
