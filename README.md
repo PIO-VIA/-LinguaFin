@@ -1,10 +1,10 @@
 # Mboa — Ta banque dans ta langue
 
-[![SAFINUM Innovate Challenge](https://img.shields.io/badge/CNEF-SAFINUM%20INNOVATE%20CHALLENGE%202026-0f766e?style=for-the-badge)](https://safinum.cm)
+[![SAFINUM Innovate Challenge](<https://img.shields.io/badge/CNEF-SAFINUM%20INNOVATE%20CHALLENGE%202026-0f766e?style=for-the-badge>)](https://safinum.cm)
 [![Équipe GIFA](https://img.shields.io/badge/%C3%89quipe-GIFA-2563eb?style=for-the-badge)](#%C3%A9quipe-gifa)
-[![Intégrité Financière](https://img.shields.io/badge/S%C3%A9curit%C3%A9-Double%20Contrat%20BEAC%2FCOBAC-16a34a?style=for-the-badge)](#-pipeline-de-s%C3%A9curit%C3%A9-%C3%A0-double-contrat)
-[![Tests Unitaires](https://img.shields.io/badge/Tests-21%2F21%20Valid%C3%A9s-brightgreen?style=for-the-badge)](#-tests-et-qualit%C3%A9)
-[![Mozilla Linter](https://img.shields.io/badge/web--ext%20lint-0%20erreur%2C%200%20warning-blue?style=for-the-badge)](#-tests-et-qualit%C3%A9)
+[![Intégrité Financière](<https://img.shields.io/badge/S%C3%A9curit%C3%A9-Double%20Contrat%20BEAC%2FCOBAC-16a34a?style=for-the-badge>)](#-pipeline-de-s%C3%A9curit%C3%A9-%C3%A0-double-contrat)
+[![Tests Unitaires](<https://img.shields.io/badge/Tests-21%2F21%20Valid%C3%A9s-brightgreen?style=for-the-badge>)](#-tests-et-qualit%C3%A9)
+[![Mozilla Linter](<https://img.shields.io/badge/web--ext%20lint-0%20erreur%2C%200%20warning-blue?style=for-the-badge>)](#-tests-et-qualit%C3%A9)
 
 **Mboa** est une extension web d'accessibilité linguistique universelle et de sécurité financière active conçue spécifiquement pour l'écosystème bancaire et Mobile Money camerounais.
 
@@ -17,17 +17,19 @@ Développée par l'**Équipe GIFA** pour le **SAFINUM INNOVATE CHALLENGE 2026**,
 * **Nom de l'équipe** : **GIFA** (*Groupe d'Innovation pour la Finance Accessible*)
 * **Compétition** : SAFINUM INNOVATE CHALLENGE 2026
 * **Organisateur** : Comité National Économique et Financier du Cameroun (CNEF)
-* **Dossier technique officiel** : Compilé et disponible sous [SAFINUM_GIFA_Dossier_Technique.pdf](file:///home/pio/Documents/projet/linguafin/SAFINUM_GIFA_Dossier_Technique.pdf) (généré via `npm run dossier:pdf`)
 
 ---
 
 ## 🎯 Problématique & Solution
 
 ### Le constat au Cameroun
+
 Plus d'un citoyen camerounais sur deux éprouve des réticences ou des difficultés face au jargon bancaire complexe formulé exclusivement en français ou en anglais. Cette barrière de la langue engendre une vulnérabilité accrue aux arnaques Mobile Money récurrentes et limite l'inclusion financière des populations non francophones ou non anglophones.
 
 ### La réponse apportée par Mboa
+
 Mboa injecte une couche d'accessibilité native et de protection active directement dans le navigateur :
+
 1. **Compréhension immédiate** : Traduction transparente et réversible dans 4 grandes langues nationales camerounaises (**Ewondo**, **Duala**, **Fulfulde**, **Pidgin**).
 2. **Double contrat d'intégrité** : Montants, numéros et références sont rigoureusement isolés ; la traduction ne voit aucun chiffre et ne peut en altérer aucun.
 3. **Vérification mathématique indépendante** : L'extension recalcule les frais et totaux affichés par le service financier et alerte instantanément en cas d'erreur ou de surfacturation.
@@ -38,18 +40,18 @@ Mboa injecte une couche d'accessibilité native et de protection active directem
 
 ## 🌟 Fonctionnalités Clés
 
-| Fonctionnalité | Description et Garantie |
-| :--- | :--- |
-| 🔒 **Montants verrouillés** | Montants, frais, numéros de téléphone, IBAN/comptes, dates et références sont extraits avant traduction et réinjectés à l'identique. Tout ajout ou altération de chiffre rejette la traduction. |
-| 🧮 **Calculs vérifiés** | Mboa vérifie de manière indépendante l'équation `Total = Montant + Frais` et le respect des barèmes réglementaires affichés. |
-| 🪞 **Contrôle Saisi = Affiché** | Les données saisies dans les formulaires sont comparées à l'écran de récapitulatif afin d'intercepter les altérations silencieuses de montant ou de bénéficiaire. |
-| 🛡 **Bouclier anti-arnaque** | Moteur heuristique 100 % local entraîné sur le corpus réel *Stop Arnaque 237* : alerte sur les demandes de code secret/PIN, faux transferts par erreur, pressions d'urgence et faux sites bancaires. **0 fausse alerte sur 180 messages officiels vérifiés**. |
-| 🌐 **Détection automatique** | Détection automatique du français et de l'anglais. Traduction fluide de la page active et des navigations SPA dynamiques (MutationObserver). |
-| 🧾 **Récapitulatif FCFA** | Fiche claire « Avant de confirmer » avec décomposition schématique en billets et pièces BEAC (10 000, 5 000, 2 000, 1 000 FCFA). |
-| 🔊 **Voix & Synthèse** | Écoute de la page, du récapitulatif et des alertes. Prise en charge des enregistrements audio de locuteurs natifs validés dans le Studio. |
-| 🧩 **Composition par Blocs** | Assemblage hors ligne de phrases financières inédites à partir de 56 blocs syntaxiques relus, sans appel LLM risquant d'inventer des chiffres. |
-| 🔎 **Diagnostic de transparence** | Si un terme est inconnu, Mboa conserve l'original intact, affiche l'intention générale et surligne les mots manquants via l'API standard *CSS Custom Highlight*. |
-| 🎙 **Studio Linguistique** | Espace intégré (`studio/studio.html`) permettant aux linguistes et locuteurs natifs de relire, corriger, valider (double signature) et enregistrer leur voix. |
+| Fonctionnalité                         | Description et Garantie                                                                                                                                                                                                                                                    |
+| :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🔒 **Montants verrouillés**      | Montants, frais, numéros de téléphone, IBAN/comptes, dates et références sont extraits avant traduction et réinjectés à l'identique. Tout ajout ou altération de chiffre rejette la traduction.                                                                   |
+| 🧮 **Calculs vérifiés**         | Mboa vérifie de manière indépendante l'équation `Total = Montant + Frais` et le respect des barèmes réglementaires affichés.                                                                                                                                      |
+| 🪞 **Contrôle Saisi = Affiché** | Les données saisies dans les formulaires sont comparées à l'écran de récapitulatif afin d'intercepter les altérations silencieuses de montant ou de bénéficiaire.                                                                                                  |
+| 🛡 **Bouclier anti-arnaque**      | Moteur heuristique 100 % local entraîné sur le corpus réel *Stop Arnaque 237* : alerte sur les demandes de code secret/PIN, faux transferts par erreur, pressions d'urgence et faux sites bancaires. **0 fausse alerte sur 180 messages officiels vérifiés**. |
+| 🌐 **Détection automatique**     | Détection automatique du français et de l'anglais. Traduction fluide de la page active et des navigations SPA dynamiques (MutationObserver).                                                                                                                             |
+| 🧾 **Récapitulatif FCFA**        | Fiche claire « Avant de confirmer » avec décomposition schématique en billets et pièces BEAC (10 000, 5 000, 2 000, 1 000 FCFA).                                                                                                                                      |
+| 🔊 **Voix & Synthèse**           | Écoute de la page, du récapitulatif et des alertes. Prise en charge des enregistrements audio de locuteurs natifs validés dans le Studio.                                                                                                                               |
+| 🧩 **Composition par Blocs**      | Assemblage hors ligne de phrases financières inédites à partir de 56 blocs syntaxiques relus, sans appel LLM risquant d'inventer des chiffres.                                                                                                                          |
+| 🔎 **Diagnostic de transparence** | Si un terme est inconnu, Mboa conserve l'original intact, affiche l'intention générale et surligne les mots manquants via l'API standard *CSS Custom Highlight*.                                                                                                       |
+| 🎙 **Studio Linguistique**        | Espace intégré (`studio/studio.html`) permettant aux linguistes et locuteurs natifs de relire, corriger, valider (double signature) et enregistrer leur voix.                                                                                                          |
 
 ---
 
@@ -57,15 +59,16 @@ Mboa injecte une couche d'accessibilité native et de protection active directem
 
 Mboa couvre les principales zones géolinguistiques du Cameroun :
 
-| Langue | Code ISO | Régions couvertes | Statut linguistique |
-| :--- | :--- | :--- | :--- |
-| **Ewondo** | `ewo` | Centre, Sud (Yaoundé et ses environs) | Relu et validé |
-| **Duálá** | `dua` | Littoral (Douala, bassin du Wouri) | Relu et validé |
-| **Fulfulde** | `fub` | Adamaoua, Nord, Extrême-Nord | Relu et validé |
-| **Pidgin (Kamtok)** | `wes` / `pcm` | Nord-Ouest, Sud-Ouest, Littoral, véhiculaire national | Relu et validé |
-| **Français** / **Anglais** | `fr` / `en` | Langues officielles de source | Langues sources |
+| Langue                                  | Code ISO          | Régions couvertes                                     | Statut linguistique |
+| :-------------------------------------- | :---------------- | :----------------------------------------------------- | :------------------ |
+| **Ewondo**                        | `ewo`           | Centre, Sud (Yaoundé et ses environs)                 | Relu et validé     |
+| **Duálá**                       | `dua`           | Littoral (Douala, bassin du Wouri)                     | Relu et validé     |
+| **Fulfulde**                      | `fub`           | Adamaoua, Nord, Extrême-Nord                          | Relu et validé     |
+| **Pidgin (Kamtok)**               | `wes` / `pcm` | Nord-Ouest, Sud-Ouest, Littoral, véhiculaire national | Relu et validé     |
+| **Français** / **Anglais** | `fr` / `en`   | Langues officielles de source                          | Langues sources     |
 
 ### Protocole de validation linguistique
+
 * **Double relecture native indépendante** : Une phrase n'obtient le statut `validated` qu'après validation concordante de deux locuteurs natifs distincts.
 * **Rétro-traduction orale à l'aveugle** : Contrôle par un troisième locuteur pour s'assurer de l'absence de contresens financier.
 * **Garde-fous cryptographiques et structurels** : Le Studio refuse tout enregistrement ou export de pack qui omet une variable `{0}` ou injecte un chiffre absent du texte original.
@@ -158,6 +161,7 @@ linguafin/
 ## 🚀 Installation & Démarrage Rapide
 
 ### Option A : Google Chrome, Microsoft Edge, Brave, Opera
+
 1. Ouvrez votre navigateur et accédez à `chrome://extensions` (ou `edge://extensions`).
 2. Activez l'option **Mode développeur** en haut à droite.
 3. Cliquez sur **Charger l'extension non empaquetée** (*Load unpacked*).
@@ -165,6 +169,7 @@ linguafin/
 5. L'extension Mboa est immédiatement opérationnelle !
 
 ### Option B : Mozilla Firefox & Firefox pour Android
+
 1. Ouvrez Firefox et tapez `about:debugging#/runtime/this-firefox` dans la barre d'adresses.
 2. Cliquez sur **Charger un module temporaire...** (*Load Temporary Add-on*).
 3. Sélectionnez le fichier `dist/firefox/manifest.json` (ou `mboa/manifest.json`).
@@ -198,6 +203,7 @@ npm run shield
 ## ⌨️ Raccourcis Clavier
 
 Pour une accessibilité maximale au clavier :
+
 * <kbd>Alt</kbd> + <kbd>Maj</kbd> + <kbd>M</kbd> : Ouvrir ou fermer le panneau de contrôle Mboa.
 * <kbd>Alt</kbd> + <kbd>Maj</kbd> + <kbd>L</kbd> : Démarrer la lecture à voix haute de la page.
 * <kbd>Alt</kbd> + <kbd>Maj</kbd> + <kbd>O</kbd> : Basculer instantanément entre la langue nationale et le texte original.
