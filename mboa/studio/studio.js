@@ -1,11 +1,9 @@
-// Studio linguistique : relecture, correction, validation tracée et enregistrement audio natif.
 const M = globalThis.MBOA;
 const E = M.entities;
 const $ = (s) => document.querySelector(s);
 const esc = M.util.escapeHtml;
 const LANGS = ['ewo', 'dua', 'fub', 'pcm'];
 let overrides = {};
-// Phrases complètes + blocs de composition : tout se valide au même endroit.
 const ENTRIES = [...M.phrases, ...(M.blocks || [])];
 let lang = 'ewo';
 let recorder = null;
@@ -24,7 +22,6 @@ function statusOf(p) {
   return overrides[lang]?.[p.id]?.status || (M.packs[lang].status === 'validated' ? 'validated' : 'draft');
 }
 
-// Garde-fou : mêmes emplacements {n}, aucun chiffre ajouté.
 function checkText(p, text) {
   const want = ([...p.fr][0].match(/\{\d+\}/g) || []).sort().join();
   const got = (text.match(/\{\d+\}/g) || []).sort().join();
@@ -165,7 +162,6 @@ $('#import').onchange = async (e) => {
   } catch { alert('Fichier invalide (format mboa-pack/1 attendu).'); }
 };
 
-// Feuille de validation CSV (Excel / Google Sheets) remplie par les locuteurs natifs.
 function parseCsv(text) {
   const rows = []; let row = [], cell = '', q = false;
   text = text.replace(/^\ufeff/, '');
@@ -199,7 +195,6 @@ $('#importCsv').onchange = async (e) => {
     if (err) { refused.push(`${p.id} : ${err}`); continue; }
     const st = (r[I.st] || '').toLowerCase();
     const r1 = (r[I.r1] || '').trim(), r2 = (r[I.r2] || '').trim();
-    // « validé » exige DEUX relecteurs différents ; sinon la phrase reste à valider.
     const status = /revoir/.test(st) ? 'review' : /valid/.test(st) && r1 && r2 && r1 !== r2 ? 'validated' : 'draft';
     if (status === 'validated') ok++; if (status === 'review') review++;
     overrides[target][p.id] = { text, status, by: [r1, r2].filter(Boolean).join(' + '), date: (r[I.date] || '').trim() || new Date().toISOString().slice(0, 10) };

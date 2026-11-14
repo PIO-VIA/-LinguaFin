@@ -1,6 +1,3 @@
-// Argent : lecture des montants, billets FCFA, et VÉRIFICATION INDÉPENDANTE des calculs
-// affichés par le service (total = montant + frais, frais conformes au barème affiché).
-// Tout se passe en mémoire, dans la page : rien n'est stocké ni transmis.
 (() => {
   const M = globalThis.MBOA;
 
@@ -13,7 +10,7 @@
     const lastSep = Math.max(s.lastIndexOf(','), s.lastIndexOf('.'));
     if (lastSep >= 0) {
       const decimals = s.length - lastSep - 1;
-      if (decimals === 3) s = s.replace(/[.,]/g, ''); // séparateur de milliers
+      if (decimals === 3) s = s.replace(/[.,]/g, '');
       else s = s.slice(0, lastSep).replace(/[.,]/g, '') + '.' + s.slice(lastSep + 1);
     }
     const n = Number(s);
@@ -22,7 +19,6 @@
 
   const parsePercent = (raw) => parseAmount(String(raw).replace('%', '')) / 100;
 
-  // Billets et pièces BEAC (franc CFA d'Afrique centrale).
   const DENOMS = [
     { v: 10000, kind: 'note', color: '#7c3aed' },
     { v: 5000, kind: 'note', color: '#0e7490' },
@@ -49,7 +45,6 @@
 
   const fmt = (n) => Math.round(n).toLocaleString('fr-FR').replace(/[  ]/g, ' ');
 
-  // Illustrations volontairement schématiques (pas de reproduction de billets réels).
   function noteSvg(d) {
     const label = d.v >= 1000 ? `${d.v / 1000} 000` : String(d.v);
     if (d.kind === 'note') {
@@ -76,8 +71,6 @@
     return `<div class="money" aria-hidden="true">${items.join('')}</div>`;
   }
 
-  // Extraction des « faits » financiers affichés : on repère les LIBELLÉS par leur
-  // sens (mémoire d'intentions) et on lit la valeur voisine. Lecture seule.
   const ROLES = ['amount', 'fee', 'total', 'balance', 'beneficiary', 'phone', 'reference'];
 
   function extractFacts(root, sourceOf) {
@@ -101,7 +94,6 @@
         labels.push({ node: n, role: entry.role });
       }
     }
-    // Pour chaque rôle, on garde la valeur la plus PROCHE de son libellé.
     for (const { node, role } of labels) {
       const v = valueNear(node, role, sourceOf);
       if (v && (!facts[role] || v.depth < facts[role].depth)) facts[role] = v;
@@ -140,7 +132,7 @@
         if (!M.entities.isValueOnly(raw)) continue;
         const { tokens } = M.entities.protect(raw);
         if (['amount', 'fee', 'total', 'balance'].includes(role)) {
-          const a = tokens.find((x) => x.type === 'amount'); // jamais un simple numéro (ex. numéro d'étape)
+          const a = tokens.find((x) => x.type === 'amount');
           if (a) return { raw, value: parseAmount(a.raw), el: t.parentElement, depth };
         } else if (role === 'phone') {
           const p = tokens.find((x) => x.type === 'phone');
@@ -161,7 +153,6 @@
       ? 0
       : Math.min(rule.max, Math.max(rule.min, Math.round(amount * rule.rate)));
 
-  // Vérifications indépendantes. Chaque résultat : { id, ok, detail }.
   function checks(f) {
     const out = [];
     const A = f.amount?.value, F = f.fee?.value, T = f.total?.value, B = f.balance?.value;

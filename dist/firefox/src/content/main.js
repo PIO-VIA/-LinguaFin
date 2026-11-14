@@ -1,4 +1,3 @@
-// Chef d'orchestre : réglages, traduction, vérifications, bouclier, guide, raccourcis.
 (() => {
   const M = globalThis.MBOA;
   if (globalThis.__mboaStarted) return;
@@ -6,10 +5,9 @@
 
   const DEFAULTS = { lang: 'off', shield: true, guide: true, autoVoice: false, tips: true, missing: true, firstRun: true, lastLang: 'ewo', excluded: [], region: '' };
   const HOST = location.hostname;
-  let page = { lang: null, declared: null }; // langue détectée de la page (fr / en / null)
+  let page = { lang: null, declared: null };
   let lastDetect = 0;
 
-  // Langue cible devinée depuis les réglages du navigateur (si l'utilisateur y a mis sa langue).
   function browserLang() {
     for (const l of navigator.languages || [navigator.language || '']) {
       const c = String(l).toLowerCase();
@@ -22,7 +20,6 @@
   }
 
   const excludedHere = () => (S.excluded || []).includes(HOST);
-  // Langue réellement appliquée : celle de l'utilisateur, sauf site exclu ou page ni française ni anglaise.
   const effective = () => (S.lang !== 'off' && !excludedHere() && page.lang ? S.lang : 'off');
 
   function detectPage(force) {
@@ -39,7 +36,7 @@
   let S = { ...DEFAULTS };
   let pendingNew = [];
   let refreshTimer = 0;
-  const typed = {}; // valeurs saisies par l'utilisateur (mémoire vive de la page uniquement)
+  const typed = {};
   const alerted = new Set();
 
   const L = () => (S.lang === 'off' ? 'fr' : S.lang);
@@ -51,7 +48,7 @@
       S = { ...DEFAULTS, ...(await chrome.storage.sync.get(DEFAULTS)) };
       const { overrides } = await chrome.storage.local.get('overrides');
       M.engine.setOverrides(overrides || {});
-    } catch { /* page sans accès extension : valeurs par défaut */ }
+    } catch {}
   }
 
   function save(patch) {
@@ -59,7 +56,6 @@
     if (hasChrome) chrome.storage.sync.set(patch).catch(() => {});
   }
 
-  // ——— Actions ———
   function setLang(lang) {
     save({ lang, firstRun: false, ...(lang !== 'off' ? { lastLang: lang } : {}) });
     M.dom.setLang(effective());
@@ -121,7 +117,6 @@
     if (hasChrome) chrome.runtime.sendMessage({ type: 'open-studio' }).catch(() => {});
   }
 
-  // ——— Guide pas à pas ———
   function findGuideTarget() {
     for (const cb of document.querySelectorAll('input[type=checkbox]')) {
       if (cb.checked || cb.disabled) continue;
@@ -132,8 +127,6 @@
     }
     const btns = [...document.querySelectorAll('button, [role=button], input[type=submit]')]
       .filter((b) => !b.disabled && visible(b) && !M.dom.skipped(b));
-    // Étape de confirmation avec un code encore vide : on guide d'abord vers le champ du code,
-    // jamais vers « Confirmer ».
     const hasConfirm = btns.some((b) => M.engine.identify(textOf(b) || b.value || '')?.entry.role === 'confirm');
     if (hasConfirm) {
       const secret = [...document.querySelectorAll('input[type=password], input[autocomplete=one-time-code], input[name*=pin i], input[id*=pin i], input[inputmode=numeric]')]
@@ -149,7 +142,6 @@
     return null;
   }
 
-  // ——— Vérifications croisées : ce qui est affiché = ce que l'utilisateur a saisi ———
   function crossChecks(f) {
     const out = [];
     const norm = (x) => String(x).replace(/[\s  ]/g, '').toLowerCase();
@@ -164,7 +156,6 @@
     return out;
   }
 
-  // ——— Rafraîchissement après chaque changement de la page ———
   function refresh() {
     clearTimeout(refreshTimer);
     refreshTimer = setTimeout(doRefresh, 120);
@@ -172,7 +163,6 @@
 
   function doRefresh() {
     if (!document.body) return;
-    // Page encore vide au chargement (application web) : on retente la détection de langue.
     if (!page.lang && detectPage(false) && effective() !== M.dom.getLang()) { M.dom.setLang(effective()); return refresh(); }
     M.view.renderStats(M.dom.recount());
 
@@ -191,7 +181,6 @@
       M.view.showAlert({ id, level: 'high', title, body: c.detail });
     }
 
-    // Bouclier + lecture automatique des alertes du service.
     const fresh = pendingNew;
     pendingNew = [];
     for (const { src, res } of fresh) {
@@ -226,7 +215,6 @@
     }
   }
 
-  // ——— Raccourcis clavier (Alt+Maj+…) ———
   function onKey(e) {
     if (!e.altKey || !e.shiftKey) return;
     const k = e.key.toLowerCase();
@@ -237,13 +225,9 @@
   async function init() {
     await load();
     M.engine.build();
-    // Première installation : si le navigateur est réglé sur une de nos langues, on l'applique
-    // directement ; sinon le panneau s'ouvre UNE fois pour la choisir. Ensuite, tout est automatique.
     if (S.firstRun && S.lang === 'off') { const b = browserLang(); if (b) save({ lang: b, lastLang: b }); }
     M.view.mount(S, { setLang, setSetting, readPage, openStudio, refresh });
     detectPage(true);
-    // Application web qui se remplit après le chargement : on réessaie la détection
-    // pendant ~20 s tant que la langue de la page n'est pas reconnue.
     let tries = 0;
     const retry = setInterval(() => {
       if (page.lang || ++tries > 20) return clearInterval(retry);
@@ -253,7 +237,6 @@
     M.dom.start(effective(), (st) => { pendingNew.push(...st.lastNew); refresh(); });
     document.addEventListener('keydown', onKey, true);
     siteCheck();
-    // Tant que la langue n'a jamais été choisie, le panneau s'ouvre pour la demander (une seule fois suffit).
     if (S.firstRun && S.lang === 'off') M.view.openPanel();
     else if (S.firstRun) save({ firstRun: false });
 

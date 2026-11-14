@@ -1,5 +1,3 @@
-// Interface MBOA, isolée dans un Shadow DOM : aucune règle CSS de la page ne l'atteint,
-// et elle ne modifie aucun style de la page. Accessible au clavier et aux lecteurs d'écran.
 (() => {
   const M = globalThis.MBOA;
   const esc = (s) => M.util.escapeHtml(s ?? '');
@@ -163,7 +161,6 @@
     return host;
   }
 
-  // ——— Bouton & panneau ———
   function renderFab() {
     const p = M.packs[view.lang];
     view.els.fab.querySelector('.code').textContent = view.lang === 'off' ? 'Original' : (p?.name || view.lang);
@@ -172,8 +169,6 @@
   }
 
   const LANGS = ['ewo', 'dua', 'fub', 'pcm', 'fr'];
-  // Langues proposées pour la région choisie : celles de la région + celles parlées partout,
-  // et toujours la langue déjà choisie. Sans région : toutes.
   const visibleLangs = () => {
     const r = view.settings.region;
     if (!r) return LANGS;
@@ -229,8 +224,6 @@
     renderStats(M.dom?.stats || {});
   }
 
-  // Choisir sa langue EN L'ÉCOUTANT : chaque langue dit sa salutation (voix native du Studio
-  // si elle a été enregistrée, sinon synthèse locale). Utile à qui lit difficilement.
   const greeting = (c) => ({ text: `${M.packs[c].sample}. ${M.packs[c].native}.`, lang: c, id: 'hello' });
   function markSpeaking(c) {
     view.els.panel.querySelectorAll('.lrow').forEach((r) => r.classList.toggle('speaking', !!c && r.dataset.row === c));
@@ -241,11 +234,9 @@
     markSpeaking(null);
   }
   function hearAll() {
-    // Seulement les langues affichées (région choisie) : jamais toute la liste.
     M.voice.readAll(visibleLangs().map((c) => ({ ...greeting(c), el: c })), (c) => markSpeaking(c));
   }
 
-  // Ce que Mboa a compris de la page : langue détectée, traduction automatique ou non, et pourquoi.
   function pageLine() {
     const p = view.page;
     if (!p.host) return '';
@@ -300,7 +291,6 @@
       + miss);
   }
 
-  // ——— Info-bulle « texte original » ———
   function translatedNodesIn(el) {
     if (!el || el.nodeType !== 1 || el.id === 'mboa-host') return [];
     const out = [];
@@ -314,7 +304,6 @@
     return null;
   }
 
-  // Pourquoi ce texte n'est pas traduit : mots manquants, ou tournure non validée.
   const whyHtml = (res) => res.reason === 'words'
     ? `${esc(T('missingWords'))} : ${res.missing.map((w) => `<mark>${esc(w)}</mark>`).join(' ')}`
     : esc(T('unknownPhrase'));
@@ -367,7 +356,6 @@
     M.voice.speak(recs.map((r) => r.res.out).join(' '), view.lang, recs[0].res.id);
   }
 
-  // ——— Récapitulatif « Avant de confirmer » ———
   function renderRecap(facts, checks) {
     const R = view.els.recap;
     const show = view.lang !== 'off' || checks.some((c) => !c.ok);
@@ -375,7 +363,7 @@
     const confirmStep = !!facts.beneficiary;
     const bad = checks.some((c) => !c.ok && !c.warn);
     if (!view.userToggled) view.recapMin = false;
-    if (bad) view.recapMin = false; // une anomalie est toujours affichée en grand
+    if (bad) view.recapMin = false;
     const row = (k, f) => (f ? `<dt>${esc(T(k))}</dt><dd>${esc(f.raw)}</dd>` : '');
     const money = (f) => (f && Number.isFinite(f.value) && f.value > 0 ? M.money.moneyHtml(f.value) : '');
     const chk = checks.map((c) => {
@@ -401,8 +389,6 @@
     R.querySelector('[data-a=speak]').onclick = () => speakRecap(facts, checks);
   }
 
-  // Zéro régression visuelle : la carte choisit le coin qui ne masque AUCUN contrôle
-  // de la page (bouton, champ, lien). Si tous les coins gênent, elle se replie.
   const INTERACTIVE = 'button, a[href], input, select, textarea, label, [role=button], [tabindex]:not([tabindex="-1"])';
   function placeRecap(R) {
     const w = R.offsetWidth, h = R.offsetHeight, m = 16, fab = 84;
@@ -433,7 +419,6 @@
     M.voice.readAll(parts.map((text) => ({ text, lang: L })));
   }
 
-  // ——— Alertes ———
   const shown = new Map();
   function showAlert({ id, level = 'medium', title, body, speakText }) {
     if (shown.has(id)) return;
@@ -452,7 +437,6 @@
   }
   function clearAlert(id) { const el = shown.get(id); if (el) { el.remove(); shown.delete(id); } }
 
-  // ——— Guide & surlignage ———
   function place(box, el) {
     const r = el.getBoundingClientRect();
     if (!r.width && !r.height) { box.hidden = true; return; }

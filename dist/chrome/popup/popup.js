@@ -34,7 +34,6 @@ document.getElementById('read').onclick = () => send('read-page');
 document.getElementById('studio').onclick = () => chrome.tabs.create({ url: chrome.runtime.getURL('studio/studio.html') });
 render();
 
-// Icônes SVG (même famille que le panneau) devant les actions.
 document.querySelectorAll('[data-icon]').forEach((el) => {
   const t = document.createElement('span');
   M.util.setHTML(t, M.icon(el.dataset.icon, { size: 18 }));

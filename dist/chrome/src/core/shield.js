@@ -1,6 +1,3 @@
-// Bouclier anti-arnaque : détecte localement les schémas de fraude Mobile Money courants
-// au Cameroun (demande de code PIN, faux gain, « transfert par erreur », menace de blocage,
-// faux service client) et les sites qui imitent un service financier.
 (() => {
   const M = globalThis.MBOA;
   const norm = (s) => M.util.stripDiacritics(String(s).toLowerCase()).replace(/[’`]/g, "'");
@@ -9,26 +6,20 @@
   const GIVE = "(envoy|communiqu|partag|donn|transmet|dict|send|share|give|tell|forward|read (it|out)|reply)";
   const ADVICE = /(ne\s+(le\s+|la\s+|les\s+)?(partagez|communiquez|donnez|transmettez|envoyez|divulguez)\s+jamais|jamais|never|n'est jamais|ne vous demandera|will never ask|do not share|don't share)/;
 
-  // Indices réutilisés (texte normalisé : minuscules, sans accents).
   const PHONE = String.raw`(\[phone[^\]]*\]|\+?\d[\d\s.-]{7,}\d)`;
   const AMOUNT = String.raw`(\d[\d\s.,]*\s?(f\s?cfa|fcfa|xaf|xof|cfa|frs?|francs?|euros?|go|gb|mo|mb|k)\b|\d+\s?000\b|(somme|montant) d'argent|amount of money|sum of money)`;
   const GIFT = String.raw`(gagn\w*|recevez|recevoir|recevront|obtenez|obtenir|offert\w*|gratuit\w*|cadeau|subvention\w*|prime\b|lots?\b|you (have )?won|win\b|claim|receive\b|free\b|gift|grant)`;
-  // Appel à l'action « fort » : formulaire, sondage, confirmation de numéro, lien non officiel.
   const STRONG_CTA = String.raw`(remplissez|fill (in|out)|repondez a (ce|cette|notre)|participez a (ce|cette|notre)|sondage|questionnaire|survey|confirme[rz]? (votre|ton) numero|confirm your number|entrez votre numero|enter your (phone )?number|verifiez si votre nom|postulez maintenant)`;
   const CALL = String.raw`((appel(ez|er)|contactez|call|whatsapp|telegram)\D{0,25}${PHONE})`;
   const MASS = String.raw`(a tous les camerounais|chaque camerounais|tout le monde|tous les (anciens )?clients|all cameroonians|everyone)`;
   const SELECTED = String.raw`((selectionne|choisi)\w*(\(e\))?\s(parmi|among)|tire\w* au sort|parmi les rares|among the few)`;
 
-  // Liens présents dans le texte (y compris « désamorcés » : hxxps, [.]) et leur caractère officiel.
   function linksOf(t) {
     const u = t.replace(/\[\.\]/g, '.').replace(/hxxp/g, 'http');
     const hosts = [...u.matchAll(/(?:https?:\/\/|www\.|\blink:?\s+|\blien\s+(?:ici\s+)?:?\s*)([a-z0-9-]+(?:\.[a-z0-9-]+)+)/g)].map((m) => m[1].replace(/^www\./, ''));
     return { any: hosts.length > 0 || /\b(cliquez|clique|click) (ici|here|sur le lien|on the link)|ouvre[sz]? ce lien|open (this|the) link|enter this link/.test(t), hosts };
   }
 
-  // Chaque règle exige PLUSIEURS indices forts réunis : on préfère manquer une arnaque
-  // douteuse que d'alarmer à tort sur un vrai reçu ou une vraie promotion d'opérateur.
-  // Réglage et mesure sur le jeu public « Stop Arnaque 237 » (voir tests/shield-eval.mjs).
   const RULES = [
     { id: 'secret_request', test: (t) => (new RegExp(`${SECRET}.{0,60}${GIVE}|${GIVE}.{0,40}${SECRET}`).test(t)) && !ADVICE.test(t),
       fr: 'On vous demande votre code secret. Aucune banque ne le demande jamais.' },
@@ -54,8 +45,6 @@
       fr: 'Gain quotidien « garanti » : schéma de Ponzi.' },
   ];
 
-  // Vrai reçu d'opérateur (avec éventuellement une pub en pied de message) : seules les
-  // règles « code secret », « agent » et « erreur de transfert » s'y appliquent.
   const RECEIPT = /(financial transaction id|transaction id|your new balance|votre nouveau solde|fee paid|fees? was|frais pay)/;
   const RECEIPT_RULES = new Set(['secret_request', 'fake_agent', 'refund_trick']);
 
@@ -68,7 +57,6 @@
     return { level: reasons.length ? 'high' : 'none', reasons };
   }
 
-  // Domaines officiels connus (liste extensible ; vérification 100 % locale).
   const KNOWN = [
     'mtn.cm', 'mtncameroon.net', 'orange.cm', 'orangemoney.orange.cm', 'afrilandfirstbank.com', 'ecobank.com',
     'bicec.com', 'ubagroup.com', 'societegenerale.cm', 'expressunion.net', 'cca-bank.com', 'campost.cm', 'safinum.cm',
@@ -86,7 +74,6 @@
 
   const isOfficial = (host) => KNOWN.some((k) => host === k || host.endsWith('.' + k));
 
-  // Nom « enregistrable » sans l'extension de pays : orange.cm et orange.fr → « orange ».
   const nameOf = (host) => { const p = host.split('.'); return p.length >= 2 ? p[p.length - 2] : host; };
 
   function checkSite(loc, { hasSecretField = false, financial = false } = {}) {
@@ -95,7 +82,6 @@
     const local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(host) || host.endsWith('.localhost') || host.endsWith('.test');
     if (!host || local || loc.protocol === 'chrome-extension:' || loc.protocol === 'moz-extension:') return out;
     if (loc.protocol === 'http:' && hasSecretField) out.push({ id: 'insecure', level: 'high' });
-    // Imitation : seulement sur une page qui demande un code / mot de passe (là où le vol a lieu).
     if (!isOfficial(host) && hasSecretField && financial) {
       const name = nameOf(host);
       const near = KNOWN.find((k) => { const kn = nameOf(k); return kn !== name && kn.length >= 5 && lev(kn, name) <= (kn.length >= 8 ? 2 : 1); });

@@ -1,6 +1,3 @@
-// Icônes de l'interface Mboa : une seule famille, au trait (24 × 24, trait 1,75, bouts arrondis),
-// en SVG inline, couleur héritée (currentColor). Aucun emoji, aucune police d'icônes, aucun réseau.
-// Tracés dessinés dans le style des jeux libres Lucide / Heroicons (licences ISC / MIT).
 (() => {
   const M = globalThis.MBOA;
   const P = {
@@ -34,8 +31,6 @@
     download: '<path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/>',
   };
 
-  // icon('shield', { size: 20, label: 'Protégé' }) → chaîne SVG.
-  // Sans label : décorative (aria-hidden). Avec label : image porteuse de sens.
   M.icon = (name, { size = 20, label = '', cls = '' } = {}) => {
     const a11y = label ? `role="img" aria-label="${M.util.escapeHtml(label)}"` : 'aria-hidden="true"';
     return `<svg class="i ${cls}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false" ${a11y}>${P[name] || ''}</svg>`;

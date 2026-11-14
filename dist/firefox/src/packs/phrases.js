@@ -1,16 +1,6 @@
-// Mémoire de phrases MBOA.
-// Chaque entrée = une INTENTION financière, ses formulations sources (fr/en) et sa forme
-// dans chaque langue. {0}, {1}… = valeurs verrouillées (montants, noms, numéros) recopiées
-// à l'identique depuis la page — elles ne passent jamais par la traduction.
-//
-// STATUT LINGUISTIQUE : textes ewo / dua / fub / pcm relus et validés (statut « validated »).
-// Toute correction ultérieure passe par le Studio linguistique (studio/studio.html), qui
-// enregistre le relecteur et la date.
 (() => {
   const M = globalThis.MBOA;
 
-  // Les 10 régions du Cameroun. Chaque langue déclare les siennes (regions) ou se dit parlée partout
-  // (national) : choisir sa région réduit la liste à quelques langues, même quand il y en aura 100.
   M.regions = ['Adamaoua', 'Centre', 'Est', 'Extrême-Nord', 'Littoral', 'Nord', 'Nord-Ouest', 'Ouest', 'Sud', 'Sud-Ouest'];
   M.packs = {
     fr: {
@@ -35,8 +25,6 @@
     },
   };
 
-  // Libellés de secours quand une phrase inédite n'est pas dans la mémoire :
-  // on annonce l'INTENTION dans la langue de l'utilisateur et on garde l'original intact.
   M.intents = {
     security: { fr: 'Alerte de sécurité', ewo: 'Yěn mvaé — sécurité', dua: 'Bɔ́ŋgɔ́ — sécurité', fub: 'Reenu — kisal', pcm: 'Security warning' },
     scam:     { fr: 'Arnaque possible', ewo: 'Mbɔ́ŋ — ntɔ̂ŋ ayi bə', dua: 'Mbɔ́ŋ — wa jabe', fub: 'Reenu — wuyɓe', pcm: 'Fit be scam' },
@@ -49,7 +37,6 @@
     info:     { fr: 'Information', ewo: 'Kalara', dua: 'Bwambo', fub: 'Habaru', pcm: 'Information' },
   };
 
-  // Textes de l'interface MBOA elle-même.
   M.ui = {
     title:        { fr: 'Mboa — ta banque dans ta langue', ewo: 'Mboa — bank yɔ́ a nkóbó wɔ́', dua: 'Mboa — bank ya mwáó o bwambo bo', fub: 'Mboa — banke maa e ɗemngal maa', pcm: 'Mboa — your bank for your own language' },
     language:     { fr: 'Langue', ewo: 'Nkóbó', dua: 'Bwambo', fub: 'Ɗemngal', pcm: 'Language' },
@@ -112,9 +99,7 @@
     studio:       { fr: 'Studio linguistique', ewo: 'Studio', dua: 'Studio', fub: 'Studio', pcm: 'Language studio' },
   };
 
-  // [id, intent, role, fr[], en[], { ewo, dua, fub, pcm }]
   const P = [
-    // — En-tête / navigation —
     ['brand_tagline', 'info', null, ['Banque en ligne'], ['Online banking'],
       { ewo: 'Bank a internet', dua: 'Bank o internet', fub: 'Banke e internet', pcm: 'Bank for internet' }],
     ['test_banner', 'info', null, ['Environnement de test — données fictives, aucune transaction réelle.'], ['Test environment — fictional data, no real transaction.'],
@@ -125,7 +110,6 @@
       { ewo: 'Kǔ a hackathon', dua: 'Timba o hackathon', fub: 'Ruttu e hackathon', pcm: 'Go back for hackathon' }],
     ['jury', 'info', null, ['Jury'], ['Jury'], { ewo: 'Jury', dua: 'Jury', fub: 'Jury', pcm: 'Jury' }],
 
-    // — Étapes —
     ['step_balance', 'balance', null, ['Solde'], ['Balance'],
       { ewo: 'Mɔ́nə wɔ́', dua: 'Mɔ́ni mwáó', fub: 'Ceede maa', pcm: 'Your money' }],
     ['step_fees', 'fees', 'fee', ['Frais'], ['Fees', 'Fee'],
@@ -137,7 +121,6 @@
     ['step_confirmation', 'success', null, ['Confirmation'], ['Confirmation'],
       { ewo: 'Confirmation', dua: 'Confirmation', fub: 'Tabbitinal', pcm: 'Confirmation' }],
 
-    // — Tableau de bord —
     ['hello_name', 'info', null, ['Bonjour {0}', 'Bonjour, {0}'], ['Hello {0}', 'Hello, {0}'],
       { ewo: 'Mbəmbə ámos, {0}', dua: 'Mbɔ́lɔ́, {0}', fub: 'Jam waali, {0}', pcm: 'How na, {0}' }],
     ['hello', 'info', null, ['Bonjour'], ['Hello'],
@@ -169,7 +152,6 @@
     ['tx_electricity', 'info', null, ['Facture électricité'], ['Electricity bill'],
       { ewo: 'Facture ya courant', dua: 'Facture ya courant', fub: 'Fakture kuuraŋ', pcm: 'Light bill' }],
 
-    // — Frais —
     ['fees_title', 'fees', null, ['Frais de transfert'], ['Transfer fees'],
       { ewo: 'Frais ma lóm mɔ́nə', dua: 'Frais ma lóma mɔ́ni', fub: 'Njoɓdi nelde ceede', pcm: 'Charges for send money' }],
     ['fees_sub', 'fees', null, ['Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.'], ['Choose the transfer type and amount. Fees are calculated automatically.'],
@@ -189,7 +171,6 @@
     ['back', 'info', 'back', ['Retour'], ['Back'],
       { ewo: 'Kǔ', dua: 'Tímba', fub: 'Ruttu', pcm: 'Go back' }],
 
-    // — Types d'opération —
     ['op_safinum', 'transfer', null, ['Compte Safinum'], ['Safinum account'],
       { ewo: 'Kɔ́ntə Safinum', dua: 'Kɔ́ntɔ Safinum', fub: 'Konte Safinum', pcm: 'Safinum account' }],
     ['op_safinum_desc', 'fees', null, ['Transfert instantané et gratuit'], ['Instant, free transfer'],
@@ -199,7 +180,6 @@
     ['fee_rule', 'fees', 'feeRule', ['Frais de {0} (min. {1}, max. {2})'], ['{0} fee (min. {1}, max. {2})'],
       { ewo: 'Frais : {0} (ntɔ́ŋ {1}, abwí {2})', dua: 'Frais : {0} (ndé {1}, ɓúkí {2})', fub: 'Njoɓdi : {0} (ɓuri famɗude {1}, ɓuri heewde {2})', pcm: 'Charges: {0} (smallest {1}, biggest {2})' }],
 
-    // — Bénéficiaire —
     ['beneficiary_sub', 'security', null, ['Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.'], ['Enter the recipient details. Always verify the number before confirming.'],
       { ewo: 'Tilí mam ma mod a yə kos mɔ́nə. Yěn nɔ́mbâ mvaé ǒsú ya confirmer.', dua: 'Tíla mambo ma mot a kusa. Ene nɔ́mba bwam bosó ba confirmer.', fub: 'Winndu habaruuji heɓoowo. Sahaa fuu ƴeew limoore nden boɗɗum hade tabbitinde.', pcm: 'Put the details of the person wey go receive. Always check the number well before you confirm.' }],
     ['beneficiary_name', 'transfer', 'beneficiary', ['Nom du bénéficiaire'], ['Beneficiary name'],
@@ -215,7 +195,6 @@
     ['new_beneficiary_warn', 'security', null, ["Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.", 'Ce bénéficiaire n’a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.'], ['This beneficiary has never been used on this account. Verify the number before continuing.'],
       { ewo: 'Ó ńlóm ki mɔ́nə a mod nyɛ̂ a kɔ́ntə ya. Yěn nɔ́mbâ mvaé ǒsú.', dua: 'O ta lóma mɔ́ni na mot nu o kɔ́ntɔ ni. Ene nɔ́mba bwam bosó.', fub: 'A neldaayno ceede heɓoowo oo e konte ngoo. Ƴeew limoore nden hade jokkude.', pcm: 'You never send money give this person before for this account. Check the number well before you continue.' }],
 
-    // — Récapitulatif —
     ['summary_sub', 'security', null, ['Vérifiez les informations avant de confirmer le transfert.'], ['Check the details before confirming the transfer.'],
       { ewo: 'Yěn mam mɛ́sɛ̌ mvaé ǒsú ya confirmer.', dua: 'Ene ɓɛ́sɛ̃ bwam bosó ba confirmer.', fub: 'Ƴeew habaruuji ɗii hade tabbitinde nelde.', pcm: 'Check all the details before you confirm the transfer.' }],
     ['amount', 'transfer', 'amount', ['Montant'], ['Amount'],
@@ -237,7 +216,6 @@
     ['edit', 'info', 'back', ['Modifier'], ['Edit'],
       { ewo: 'Sɔ́ŋ', dua: 'Héŋgɛ́', fub: 'Waylu', pcm: 'Change am' }],
 
-    // — Reçu —
     ['receipt_title', 'success', null, ['Transfert effectué'], ['Transfer completed'],
       { ewo: 'Mɔ́nə mə mana kə̌', dua: 'Mɔ́ni ma ma tɔ́mɔ', fub: 'Nelde gasii', pcm: 'Transfer don finish' }],
     ['receipt_sub', 'success', null, ['Votre transfert a été envoyé avec succès.'], ['Your transfer has been sent successfully.'],
@@ -249,7 +227,6 @@
     ['new_transfer', 'transfer', 'action', ['Nouveau transfert'], ['New transfer'],
       { ewo: 'Lóm mɔ́nə mfɛ́', dua: 'Lóma mɔ́ni mɔ́nɛ', fub: 'Nelde hesere', pcm: 'New transfer' }],
 
-    // — Messages, erreurs, sécurité —
     ['important_message', 'important', null, ['Message important'], ['Important message'],
       { ewo: 'Kalara ya nnɛ̂n', dua: 'Bwambo ba mbalea', fub: 'Habaru maantinngu', pcm: 'Important message' }],
     ['error_occurred', 'error', null, ['Une erreur est survenue'], ['An error occurred'],
@@ -267,7 +244,6 @@
     ['protected', 'security', null, ['Protégé', 'Protégé par chiffrement'], ['Protected'],
       { ewo: 'Ŋkɔ́ŋ', dua: 'Ɓámbá', fub: 'Reenaama', pcm: 'Protected' }],
 
-    // Codes d'erreur de la plateforme
     ['err_amount_zero', 'error', null, ['Le montant doit être supérieur à zéro.'], ['The amount must be greater than zero.'],
       { ewo: 'Mɔ́nə mə yiɛ́ yɔ́b zéro.', dua: 'Mɔ́ni ma mɛ́nɛ̂ ɓɔ́ zéro.', fub: 'Keewal ceede foti ɓurde zéro.', pcm: 'The amount must pass zero.' }],
     ['err_insufficient', 'error', null, ['Solde insuffisant pour effectuer ce transfert.', 'Solde insuffisant'], ['Insufficient balance for this transfer.', 'Insufficient balance'],
@@ -287,7 +263,6 @@
     ['network_error', 'error', null, ['Erreur réseau'], ['Network error'],
       { ewo: 'Dzam dzi abɛ́ a réseau', dua: 'Mbaki ya réseau', fub: 'Juumre rezo', pcm: 'Network problem' }],
 
-    // — Vocabulaire Mobile Money générique (autres services) —
     ['pin_enter', 'security', null, ['Entrez votre code PIN', 'Saisissez votre code PIN'], ['Enter your PIN', 'Enter your PIN code'],
       { ewo: 'Tilí code PIN wɔ́', dua: 'Tíla code PIN ya mwáó', fub: 'Winndu kod PIN maa', pcm: 'Put your PIN code' }],
     ['pin_never_share', 'security', null, ['Ne partagez jamais votre code PIN.', 'Ne communiquez jamais votre code PIN.'], ['Never share your PIN.', 'Never share your PIN code.'],

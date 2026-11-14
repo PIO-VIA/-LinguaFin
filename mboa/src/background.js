@@ -1,5 +1,3 @@
-// Service d'arrière-plan minimal : raccourcis clavier et ouverture du Studio.
-// Aucune requête réseau, aucune collecte.
 const api = globalThis.browser || globalThis.chrome;
 
 api.commands.onCommand.addListener(async (command) => {

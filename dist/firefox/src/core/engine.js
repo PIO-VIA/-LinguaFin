@@ -1,10 +1,3 @@
-// Moteur de traduction par intention.
-//  1. verrouillage des valeurs (entities.protect)
-//  2. recherche exacte dans la mémoire validée (clé normalisée)
-//  3. découpage en phrases et recherche phrase par phrase
-//  4. phrase inconnue : on annonce l'INTENTION dans la langue cible et on garde
-//     l'original intact (jamais de texte inventé)
-//  5. contrat d'intégrité vérifié sur chaque sortie ; en cas d'échec : texte original.
 (() => {
   const M = globalThis.MBOA;
   const E = M.entities;
@@ -39,7 +32,6 @@
     return t ? { text: t, status: M.packs[lang]?.status || 'draft' } : null;
   }
 
-  // Classification d'intention pour le contenu inédit (FR + EN, sans accents).
   const INTENT_RULES = [
     ['security', /\b(securite|security|alerte|alert|warning|attention|fraud|fraude|arnaque|scam|pin|otp|mot de passe|password|code secret|secret code|ne (partagez|communiquez|donnez) jamais|never share|suspect|suspicious|verifiez|verify)\b/],
     ['error', /\b(erreur|error|echec|echoue|failed|failure|impossible|indisponible|unavailable|insuffisant|insufficient|invalide|invalid|refuse|declined|rejected|rejete|expir\w*|bloque\w*|blocked)\b/],
@@ -55,22 +47,19 @@
     if (M.shield && M.shield.scoreText(text).level === 'high') return 'scam';
     for (const [intent, re] of INTENT_RULES) {
       if (!re.test(t)) continue;
-      // « n'a pas réussi », « not completed » : un succès nié est un ÉCHEC, jamais un ✅.
       if (intent === 'success' && /\b(ne|n'\w*|pas|jamais|not|never|no)\b|n't\b/.test(t)) return 'error';
       return intent;
     }
     return null;
   }
 
-  // « Bonjour, Amina » : un prénom seul en fin de phrase (après virgule, « à », « de »…)
-  // n'est pas repéré par la règle des noms à deux mots. On retente en le verrouillant.
   const TRAILING_NAME = /^(.*?(?:[,:]\s*|\s(?:à|a|de|pour|to|from|for)\s))([A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'’-]+)(\s*[.!]?)$/;
 
   function protectWithName(text) {
     const p = E.protect(text);
     if (index.has(p.key)) return p;
     const m = text.match(TRAILING_NAME);
-    if (!m || index.has(E.protect(m[2]).key)) return p; // mot connu (ex. « Frais ») : pas un nom
+    if (!m || index.has(E.protect(m[2]).key)) return p;
     const q = E.protect(m[1] + '\u0001' + m[3]);
     const i = q.masked.indexOf('\u0001');
     const before = (q.masked.slice(0, i).match(E.PH_RE) || []).length;
@@ -94,11 +83,6 @@
     return { out, entry: hit.entry, status: t.status, tokens: p.tokens, srcLang: hit.srcLang };
   }
 
-  // ——— Composition par blocs validés (phrases inédites, 100 % hors ligne) ———
-  // Garde-fous : (1) chaque mot de la phrase doit appartenir à un bloc, sinon rien ;
-  // (2) grammaire stricte ; (3) une valeur ne remplit que la place de son type ;
-  // (4) polarité : une phrase négative (échec, refus, « ne… pas »…) ne peut être
-  // composée qu'avec des blocs négatifs, et inversement ; (5) contrat d'intégrité.
   const NEG = /\b(echou\w*|echec|refus\w*|rejet\w*|annul\w*|bloqu\w*|suspendu\w*|expir\w*|insuffisant\w*|invalide|incorrect\w*|errone\w*|indisponible|impossible|faible|ne|n'\w*|pas|jamais|aucun\w*|fail\w*|unsuccessful|declined|rejected|cancel\w*|blocked|locked|suspended|insufficient|invalid|wrong|unavailable|low|not|never|no)\b/;
   const negOf = (s) => NEG.test(M.util.stripDiacritics(s.toLowerCase()));
   const KIND = { subj: 'u', pred: 'p', mod: 'm', sent: 's' };
@@ -120,7 +104,6 @@
     for (const list of bIndex.values()) list.sort((x, y) => y.words.length - x.words.length);
   }
 
-  // Découpe la clause en blocs (toute la clause doit être couverte).
   function parseClause(words, tokens) {
     const seq = [];
     let steps = 0;
@@ -172,7 +155,7 @@
       const words = E.keyOf(clause).split(' ');
       const seq = parseClause(words, p.tokens);
       if (!seq) return null;
-      if (negOf(words.join(' ')) !== seq.some((m) => m.b.neg)) return null; // polarité
+      if (negOf(words.join(' ')) !== seq.some((m) => m.b.neg)) return null;
       const pieces = [];
       for (const m of seq) {
         const t = textFor(m.b, lang);
@@ -206,11 +189,9 @@
 
     if (E.looksLikeName(trimmed)) return { kind: 'value' };
 
-    // Phrase entièrement inédite mais composable à partir de blocs validés.
     const whole = compose(trimmed, lang);
     if (whole) return { kind: 'composed', out: '≈ ' + whole.out, id: null, blocks: whole.ids, intent: classify(trimmed) || 'info', status: whole.status, tokens: whole.tokens, srcLang };
 
-    // Phrase par phrase.
     const segs = trimmed.split(SENTENCE_SPLIT);
     const parts = segs.map((s) => ({ s, r: segs.length > 1 ? exact(s, lang) || compose(s, lang) : null }));
     const known = parts.filter((p) => p.r && !p.r.same);
@@ -228,14 +209,11 @@
       }
     }
 
-    // Contenu inédit : on n'invente rien. L'original reste intact, et l'on explique POURQUOI
-    // il n'est pas traduit (mots absents des phrases et blocs validés, ou tournure non validée).
     const src = srcLang || pageLang;
     const untranslated = () => (src && !(lang === 'fr' && src === 'fr') ? { kind: 'untranslated', out: null, srcLang: src, ...diagnose(trimmed) } : null);
-    // Annonce de l'intention seulement pour un vrai message, en français ou en anglais.
     const intent = classify(trimmed);
     if (!intent) return untranslated();
-    if (M.detect && !src && intent !== 'scam') return null; // ni français ni anglais : on ne touche à rien
+    if (M.detect && !src && intent !== 'scam') return null;
     const isMessage = trimmed.split(/\s+/).length >= 6 || /[.!?]$/.test(trimmed) || intent === 'scam';
     if (!isMessage) return untranslated();
     const key = intent;
@@ -247,7 +225,6 @@
     return { kind: 'gist', out, intent: key, status: 'gist', tokens, srcLang: src, ...diagnose(trimmed) };
   }
 
-  // ——— Diagnostic des phrases non traduites ———
   let VOCAB = null;
   function vocab() {
     if (VOCAB) return VOCAB;
@@ -258,8 +235,6 @@
     return VOCAB;
   }
 
-  // Mots qui bloquent la traduction : absents de TOUTES les phrases et de tous les blocs validés.
-  // Noms propres, marques et sigles (majuscule hors début de phrase) ne sont pas des « mots manquants ».
   function diagnose(text) {
     const p = protectWithName(text);
     const proper = new Set();
@@ -297,8 +272,6 @@
 
   const ui = (key, lang) => M.ui[key]?.[lang] || M.ui[key]?.fr || key;
 
-  // Identifie l'entrée de mémoire correspondant à un texte SOURCE (sert à repérer
-  // les libellés « Montant », « Frais », « Total »… quelle que soit la langue affichée).
   function identify(text) {
     if (!index) build();
     const p = E.protect(text.trim());

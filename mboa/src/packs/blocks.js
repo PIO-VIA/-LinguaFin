@@ -1,24 +1,7 @@
-// Blocs de composition MBOA : pour traduire, hors ligne, des phrases JAMAIS VUES.
-//
-// Un message financier inédit est presque toujours un assemblage de morceaux connus :
-//   [Votre transfert] [de {montant}] [à {nom}] [a échoué] , [veuillez réessayer plus tard] .
-// Chaque morceau est un bloc relu par les locuteurs natifs (Studio / tableurs de validation).
-// Le moteur ne compose une phrase que si CHAQUE mot de la phrase est couvert par un bloc,
-// selon une grammaire stricte (sujet → compléments → prédicat → compléments). Le moindre
-// mot inconnu = pas de composition (on garde l'original + l'intention, comme avant).
-//
-// Format : [id, kind, slot, fr[], en[], { ewo, dua, fub, pcm }]
-//   kind : subj (sujet), pred (ce qui arrive), mod (complément), sent (phrase autonome)
-//   slot : type de la valeur verrouillée attendue à la place de {0} (amount, name, phone,
-//          date, ref, number) — un montant ne peut jamais remplir une place de nom.
-//
-// STATUT : relus et validés (ewo / dua / fub / pcm). Ordre des mots : les quatre
-// langues sont SVO, l'assemblage sujet + prédicat est donc conservé.
 (() => {
   const M = globalThis.MBOA;
 
   const B = [
-    // ——— Sujets ———
     ['b_subj_transfer', 'subj', null,
       ['votre transfert', 'le transfert', 'ce transfert', 'transfert', 'votre envoi', "l'envoi", 'envoi'],
       ['your transfer', 'the transfer', 'this transfer', 'transfer'],
@@ -76,7 +59,6 @@
       ['the amount', 'this amount', 'amount'],
       { ewo: 'Mɔ́nə', dua: 'Mɔ́ni', fub: 'Ceede', pcm: 'The amount' }],
 
-    // ——— Prédicats : ce qui arrive ———
     ['b_pred_success', 'pred', null,
       ['a réussi', 'a été effectué', 'a été effectuée', 'a bien été effectué', 'a bien été effectuée', 'est réussi', 'est réussie', 'réussi', 'réussie', 'effectué', 'effectuée', 'a été validé', 'a été validée', 'validé', 'validée', 'est confirmé', 'est confirmée', 'a été confirmé', 'a été confirmée', 'confirmé', 'confirmée', 'est terminé', 'est terminée', 'terminé', 'terminée'],
       ['was successful', 'succeeded', 'has been completed', 'is complete', 'was completed', 'completed', 'successful', 'has been confirmed', 'confirmed', 'has been approved', 'approved'],
@@ -150,7 +132,6 @@
       ['is required', 'is mandatory', 'required'],
       { ewo: 'a nə́ dzam di nnɛ̂n', dua: 'e ɓé ɓwámbá', fub: 'ina haani', pcm: 'must dey' }],
 
-    // ——— Compléments ———
     ['b_mod_of_amount', 'mod', 'amount',
       ['de {0}', "d'un montant de {0}"],
       ['of {0}', 'for {0}'],
@@ -171,7 +152,6 @@
       ['du {0}', 'du numéro {0}', 'depuis le {0}', 'depuis le numéro {0}'],
       ['from {0}', 'from number {0}'],
       { ewo: 'ńtɔ́ nɔ́mbâ {0}', dua: 'ɓéyɛ́ nɔ́mba {0}', fub: 'ummaaki e limoore {0}', pcm: 'from number {0}' }],
-    // Numéro seul, juste après un nom : « à Paul Atangana (+237 6 77 88 99 00) ». Recopié tel quel.
     ['b_mod_phone_bare', 'mod', 'phone',
       ['{0}'],
       ['{0}'],
@@ -217,7 +197,6 @@
       ['by sms', 'by text message', 'via sms'],
       { ewo: 'a SMS', dua: 'o SMS', fub: 'e SMS', pcm: 'for SMS' }],
 
-    // ——— Phrases autonomes (consignes) ———
     ['b_sent_retry_later', 'sent', null,
       ['veuillez réessayer plus tard', 'réessayez plus tard', 'merci de réessayer plus tard', 'réessayer plus tard'],
       ['please try again later', 'try again later'],

@@ -1,14 +1,11 @@
-// Couche DOM : traduit les nœuds texte EN PLACE, sans toucher à la structure de la page,
-// aux champs de saisie, ni aux valeurs. Chaque modification est réversible (texte source
-// conservé en mémoire) et re-vérifiée par le contrat d'intégrité juste avant écriture.
 (() => {
   const M = globalThis.MBOA;
 
-  const REC = new WeakMap();   // Text -> { src, outFull, res, lang }
-  const ATTR = new WeakMap();  // Element -> { [attr]: { src, out } }
-  const LANGATTR = new WeakMap(); // Element -> lang précédent
-  const UNTR = new WeakMap();     // Text -> { src, res } : texte laissé en original, avec la raison
-  const MISSING = new Set();      // nœuds texte contenant des mots manquants (pour le surlignage)
+  const REC = new WeakMap();
+  const ATTR = new WeakMap();
+  const LANGATTR = new WeakMap();
+  const UNTR = new WeakMap();
+  const MISSING = new Set();
   let highlightOn = true;
   const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'KBD', 'SAMP', 'IFRAME', 'CANVAS', 'TEMPLATE', 'SVG', 'MATH']);
   const ATTRS = ['placeholder', 'title', 'aria-label', 'alt'];
@@ -21,11 +18,8 @@
   let onChange = () => {};
   const stats = { translated: 0, gist: 0, values: 0, rejected: 0, untranslated: 0, errors: 0, missingTop: [], lastNew: [] };
 
-  // Remonte aussi la frontière d'un Shadow DOM (élément racine -> hôte).
   const up = (e) => e.parentElement || (e.parentNode && e.parentNode.nodeType === 11 ? e.parentNode.host : null);
 
-  // Shadow DOM OUVERTS de la page (composants web) : parcourus et observés comme le reste.
-  // Les Shadow DOM fermés restent inaccessibles, par conception du navigateur.
   const OBSERVED_SHADOWS = new WeakSet();
   const OBS_OPTS = { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['placeholder', 'title', 'aria-label', 'alt'] };
   function watchShadow(sr) {
@@ -67,17 +61,12 @@
     LANGATTR.delete(el);
   }
 
-  // Phrase fragmentée par des éléments en ligne porteurs de valeurs :
-  //   "Vous allez envoyer " <b>20 000 FCFA</b> " à " <b>Marie Ngono</b>
-  // On traduit la phrase entière ; les éléments-valeurs ne bougent pas, seuls les
-  // fragments de texte entre eux sont réécrits (si l'ordre des valeurs est conservé).
   const INLINE = new Set(['B', 'STRONG', 'SPAN', 'EM', 'I', 'A', 'MARK', 'SMALL', 'CODE', 'TIME', 'DATA']);
-  const COMPOSITE = new WeakMap(); // Element parent -> { srcs: string[], lang }
+  const COMPOSITE = new WeakMap();
 
-  // Valeur = montant/numéro/référence… OU nom propre inconnu de la mémoire.
   const isValueLike = (t) => M.entities.isValueOnly(t) || (M.entities.looksLikeName(t) && !M.engine.identify(t));
 
-  let passParents = new Set(); // parents déjà examinés pendant ce passage
+  let passParents = new Set();
 
   const compSrc = (t) => (REC.get(t)?.composite && t.nodeValue === REC.get(t).outFull ? REC.get(t).src : t.nodeValue);
 
@@ -85,7 +74,7 @@
     const kids = [...parent.childNodes];
     if (kids.length < 2 || kids.length > 12) return false;
     const vals = [];
-    const slots = [[]]; // nœuds texte avant / entre / après les valeurs
+    const slots = [[]];
     for (const k of kids) {
       if (k.nodeType === 3) slots[slots.length - 1].push(k);
       else if (k.nodeType === 1 && INLINE.has(k.tagName) && k.children.length === 0 && isValueLike(k.textContent)) {
@@ -97,14 +86,13 @@
     if (!vals.length || !texts.length) return false;
     const srcs = new Map(texts.map((t) => [t, compSrc(t)]));
     const real = slots.map((nodes) => nodes.map((t) => srcs.get(t)).join('')).reduce((acc, piece, i) => acc + (i ? vals[i - 1].textContent : '') + piece, '');
-    if (!/\p{L}/u.test(slots.flat().map((t) => srcs.get(t)).join(''))) return true; // que des valeurs
+    if (!/\p{L}/u.test(slots.flat().map((t) => srcs.get(t)).join(''))) return true;
     const res = lang === 'off' ? null : M.engine.translate(real, lang);
     const restore = () => {
       for (const t of texts) { if (REC.get(t)?.composite && t.nodeValue === REC.get(t).outFull) t.nodeValue = srcs.get(t); if (REC.get(t)?.composite) REC.delete(t); }
       COMPOSITE.delete(parent);
     };
     if (!res || (res.kind !== 'exact' && res.kind !== 'composed')) { restore(); return false; }
-    // Découpe de la sortie autour des valeurs, dans l'ordre d'origine.
     let rest = res.out;
     const pieces = [];
     for (const v of vals) {
@@ -118,7 +106,6 @@
     const last = srcs.get(texts[texts.length - 1]) || '';
     pieces[0] = first.match(/^\s*/)[0] + pieces[0].trimStart();
     pieces[pieces.length - 1] = pieces[pieces.length - 1].trimEnd() + last.match(/\s*$/)[0];
-    // Une valeur placée hors de portée d'un nœud texte (ex. phrase qui commence par une valeur) : abandon.
     for (let i = 0; i < slots.length; i++) if (!slots[i].length && pieces[i].trim()) { restore(); return false; }
     slots.forEach((nodes, i) => nodes.forEach((t, j) => {
       t.nodeValue = j === 0 ? pieces[i] : '';
@@ -161,7 +148,6 @@
     const lead = src.match(/^\s*/)[0];
     const trail = src.match(/\s*$/)[0];
     const outFull = lead + res.out + trail;
-    // Dernier verrou : même contrat d'intégrité, sur le texte exact qui sera écrit.
     if (!M.entities.verify(res.tokens || [], outFull).ok) { stats.rejected++; return; }
     node.nodeValue = outFull;
     REC.set(node, { src, outFull, res, lang });
@@ -219,13 +205,10 @@
     for (const el of els) if (ATTRS.some((a) => el.hasAttribute(a))) processAttrs(el);
   }
 
-  // Un nœud qui pose problème ne doit jamais casser la page ni le reste de la traduction.
   function safe(fn, ...a) {
     try { fn(...a); } catch (e) { stats.errors = (stats.errors || 0) + 1; if (stats.errors < 5) console.warn('[Mboa]', e); }
   }
 
-  // ——— Surlignage des mots pas encore traduits ———
-  // API « CSS Custom Highlight » : on colore des plages de texte SANS modifier le DOM de la page.
   const HL = 'mboa-missing';
   let styled = false;
   function ensureStyle() {
@@ -257,7 +240,7 @@
       }
       if (ranges.length) ensureStyle();
       CSS.highlights.set(HL, new Highlight(...ranges));
-    } catch (e) { /* navigateur sans prise en charge : simple absence de surlignage */ }
+    } catch (e) {}
   }
   function setHighlight(on) { highlightOn = !!on; paintMissing(); }
   const untranslatedOf = (node) => { const u = UNTR.get(node); return u && node.nodeValue === u.src ? u : null; };
@@ -269,7 +252,7 @@
     try {
       for (const r of roots) if (r.isConnected !== false) walk(r, fresh);
     } finally {
-      observer && observer.takeRecords(); // on ignore nos propres mutations
+      observer && observer.takeRecords();
       applying = false;
     }
     paintMissing();
@@ -285,8 +268,6 @@
 
   function schedule(node) {
     queue.add(node);
-    // Une valeur insérée dans un élément en ligne peut compléter une phrase fragmentée :
-    // on réexamine alors la phrase entière (le parent de l'élément en ligne).
     const host = node.nodeType === 1 ? node : node.parentElement;
     if (host && INLINE.has(host.tagName) && host.parentElement) queue.add(host.parentElement);
     if (!timer) timer = setTimeout(flush, 40);
@@ -312,7 +293,6 @@
     run([document.body || document.documentElement], false);
   }
 
-  // Comptage frais pour le tableau d'intégrité.
   function recount() {
     stats.translated = stats.gist = stats.values = stats.rejected = stats.untranslated = 0;
     const words = new Map();

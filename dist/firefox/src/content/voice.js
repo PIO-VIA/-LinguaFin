@@ -1,5 +1,3 @@
-// Voix : 1) enregistrement natif (Studio linguistique) si disponible,
-//        2) sinon synthèse vocale du navigateur, hors ligne, avec approximation phonétique.
 (() => {
   const M = globalThis.MBOA;
   let current = null;
@@ -54,7 +52,6 @@
     await speakOne({ text, lang, id });
   }
 
-  // Lecture séquentielle (lecture de page, récapitulatif) avec surlignage.
   async function readAll(items, highlight) {
     stop();
     onHighlight = highlight || (() => {});

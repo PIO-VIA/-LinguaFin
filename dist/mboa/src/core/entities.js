@@ -1,7 +1,3 @@
-// Verrouillage des entités sensibles.
-// Montants, numéros, références, dates et noms propres sont retirés du texte AVANT
-// toute traduction, puis réinjectés à l'identique (octet pour octet) APRÈS.
-// La traduction ne voit jamais un chiffre : elle ne peut donc pas en altérer un.
 (() => {
   const M = globalThis.MBOA;
 
@@ -9,7 +5,6 @@
     'janv|janvier|févr|fevr|février|fevrier|mars|avr|avril|mai|juin|juil|juillet|août|aout|sept|septembre|oct|octobre|nov|novembre|déc|dec|décembre|decembre|' +
     'jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|september|october|november|december';
 
-  // L'ordre compte : du plus spécifique au plus général.
   const PATTERNS = [
     ['url', /\bhttps?:\/\/[^\s]+/gi],
     ['email', /\b[\w.+-]+@[\w-]+\.[\w.-]+\b/g],
@@ -24,7 +19,6 @@
     ['number', /\d+(?:[.,]\d+)?/g],
   ];
 
-  // Suite d'au moins deux mots à majuscule, hors début de texte : nom propre probable.
   const W = "[A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'’]+(?:-[A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'’]+)?";
   const NAME_RE = new RegExp(`(?<=\\S\\s+|[,:]\\s*)${W}(?:\\s+${W}){1,3}`, 'g');
   const WHOLE_NAME_RE = new RegExp(`^${W}(?:\\s+${W}){0,3}$`);
@@ -46,7 +40,6 @@
     for (const [type, re] of PATTERNS) masked = masked.replace(re, swap(type));
     if (names) masked = masked.replace(NAME_RE, swap('name'));
 
-    // Renumérotation dans l'ordre d'apparition (indépendant de l'ordre de détection).
     const tokens = [];
     masked = masked.replace(PH_RE, (c) => {
       tokens.push(found[c.charCodeAt(0) - PUA]);
@@ -67,7 +60,6 @@
       .trim();
   }
 
-  // Le texte n'est-il qu'une valeur (montant, numéro, nom, devise…) ? Si oui : on n'y touche jamais.
   function isValueOnly(text) {
     const t = text.trim();
     if (!t) return true;
@@ -90,12 +82,10 @@
       used[+n]++;
       return t.raw;
     });
-    if (used.some((u) => u === 0)) ok = false; // une valeur source a été oubliée
+    if (used.some((u) => u === 0)) ok = false;
     return ok ? out : null;
   }
 
-  // Contrat d'intégrité : chaque valeur source est présente à l'identique dans la sortie,
-  // et la sortie ne contient AUCUN chiffre qui ne vienne pas de la source.
   function verify(tokens, output) {
     let rest = output;
     for (const t of tokens) {
