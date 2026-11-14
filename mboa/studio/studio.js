@@ -21,7 +21,7 @@ async function load() {
 const persist = () => chrome.storage.local.set({ overrides });
 
 function statusOf(p) {
-  return overrides[lang]?.[p.id]?.status || (M.packs[lang].status === 'review' ? 'draft' : 'draft');
+  return overrides[lang]?.[p.id]?.status || (M.packs[lang].status === 'validated' ? 'validated' : 'draft');
 }
 
 // Garde-fou : mêmes emplacements {n}, aucun chiffre ajouté.
@@ -135,7 +135,7 @@ function probe() {
 $('#export').onclick = () => {
   const entries = ENTRIES.map((p) => {
     const o = overrides[lang]?.[p.id];
-    return { id: p.id, intent: p.intent, fr: p.fr[0], en: p.en[0], text: o?.text || p.t[lang], status: o?.status || 'draft', by: o?.by || '', date: o?.date || '' };
+    return { id: p.id, intent: p.intent, fr: p.fr[0], en: p.en[0], text: o?.text || p.t[lang], status: o?.status || (M.packs[lang].status === 'validated' ? 'validated' : 'draft'), by: o?.by || '', date: o?.date || '' };
   });
   const blob = new Blob([JSON.stringify({ format: 'mboa-pack/1', lang, name: M.packs[lang].name, exportedAt: new Date().toISOString(), entries }, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');

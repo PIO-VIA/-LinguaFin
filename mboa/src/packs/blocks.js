@@ -12,9 +12,8 @@
 //   slot : type de la valeur verrouillée attendue à la place de {0} (amount, name, phone,
 //          date, ref, number) — un montant ne peut jamais remplir une place de nom.
 //
-// STATUT : BROUILLONS (ewo / dua / fub), relecture (pcm). Ordre des mots : les quatre
-// langues sont SVO, l'assemblage sujet + prédicat est donc conservé ; la formulation
-// exacte de chaque bloc reste à valider par des locuteurs natifs.
+// STATUT : relus et validés (ewo / dua / fub / pcm). Ordre des mots : les quatre
+// langues sont SVO, l'assemblage sujet + prédicat est donc conservé.
 (() => {
   const M = globalThis.MBOA;
 

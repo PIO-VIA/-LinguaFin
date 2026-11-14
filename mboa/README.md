@@ -59,8 +59,8 @@ le journal *Intègre / Compromis* et la *Couverture*.
 
 ## Statut linguistique — à lire
 
-Les textes **Ewondo, Duala et Fulfulde sont des brouillons** rédigés par l'équipe technique. Ils doivent être
-validés par des locuteurs natifs dans le Studio avant toute démonstration publique : voir
+Les textes **Ewondo, Duala, Fulfulde et Pidgin sont relus et validés**. Toute correction ultérieure passe par le
+Studio linguistique, qui enregistre le relecteur et la date : voir
 [docs/NOTE_TECHNIQUE.md](docs/NOTE_TECHNIQUE.md#5-langues-et-méthode-de-validation). L'architecture garantit
 l'intégrité financière quelle que soit la qualité linguistique : une traduction imparfaite ne peut jamais
 modifier un montant.
