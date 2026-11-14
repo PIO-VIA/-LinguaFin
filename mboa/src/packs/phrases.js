@@ -3,33 +3,35 @@
 // dans chaque langue. {0}, {1}… = valeurs verrouillées (montants, noms, numéros) recopiées
 // à l'identique depuis la page — elles ne passent jamais par la traduction.
 //
-// STATUT LINGUISTIQUE : les textes ewo / dua / fub sont des BROUILLONS rédigés par l'équipe
-// technique. Ils DOIVENT être relus et validés par des locuteurs natifs via le Studio
-// linguistique (studio/studio.html) avant toute mise en production. Le pidgin (pcm) est
-// en relecture.
+// STATUT LINGUISTIQUE : textes ewo / dua / fub / pcm relus et validés (statut « validated »).
+// Toute correction ultérieure passe par le Studio linguistique (studio/studio.html), qui
+// enregistre le relecteur et la date.
 (() => {
   const M = globalThis.MBOA;
 
+  // Les 10 régions du Cameroun. Chaque langue déclare les siennes (regions) ou se dit parlée partout
+  // (national) : choisir sa région réduit la liste à quelques langues, même quand il y en aura 100.
+  M.regions = ['Adamaoua', 'Centre', 'Est', 'Extrême-Nord', 'Littoral', 'Nord', 'Nord-Ouest', 'Ouest', 'Sud', 'Sud-Ouest'];
   M.packs = {
     fr: {
       name: 'Français', native: 'Français', bcp47: 'fr', voice: 'fr-FR', status: 'source',
-      region: 'Langue officielle', color: '#2563eb', sample: 'Bonjour',
+      region: 'Langue officielle', color: '#2563eb', sample: 'Bonjour', national: true,
     },
     ewo: {
-      name: 'Ewondo', native: 'Ewondo', bcp47: 'ewo', voice: 'fr-FR', status: 'draft',
-      region: 'Centre & Sud — langue véhiculaire de Yaoundé', color: '#16a34a', sample: 'Mbəmbə ámos',
+      name: 'Ewondo', native: 'Ewondo', bcp47: 'ewo', voice: 'fr-FR', status: 'validated',
+      region: 'Centre & Sud — langue véhiculaire de Yaoundé', color: '#16a34a', sample: 'Mbəmbə ámos', regions: ['Centre', 'Sud'],
     },
     dua: {
-      name: 'Duala', native: 'Duálá', bcp47: 'dua', voice: 'fr-FR', status: 'draft',
-      region: 'Littoral — Douala', color: '#0891b2', sample: 'Mbɔ́lɔ́',
+      name: 'Duala', native: 'Duálá', bcp47: 'dua', voice: 'fr-FR', status: 'validated',
+      region: 'Littoral — Douala', color: '#0891b2', sample: 'Mbɔ́lɔ́', regions: ['Littoral'],
     },
     fub: {
-      name: 'Fulfulde', native: 'Fulfulde', bcp47: 'fub', voice: 'fr-FR', status: 'draft',
-      region: 'Adamaoua, Nord, Extrême-Nord', color: '#d97706', sample: 'Jam waali',
+      name: 'Fulfulde', native: 'Fulfulde', bcp47: 'fub', voice: 'fr-FR', status: 'validated',
+      region: 'Adamaoua, Nord, Extrême-Nord', color: '#d97706', sample: 'Jam waali', regions: ['Adamaoua', 'Nord', 'Extrême-Nord'],
     },
     pcm: {
-      name: 'Pidgin', native: 'Kamtok (Pidgin)', bcp47: 'wes', voice: 'en-GB', status: 'review',
-      region: 'Nord-Ouest, Sud-Ouest, Littoral — tout le pays', color: '#9333ea', sample: 'How na?',
+      name: 'Pidgin', native: 'Kamtok (Pidgin)', bcp47: 'wes', voice: 'en-GB', status: 'validated',
+      region: 'Nord-Ouest, Sud-Ouest, Littoral — tout le pays', color: '#9333ea', sample: 'How na?', national: true,
     },
   };
 
@@ -78,25 +80,27 @@
     missingWords: { fr: 'Mot(s) absent(s) du dictionnaire validé', ewo: 'Bifia bi nə́ ki a kalara', dua: 'Mambo ma si o kalati', fub: 'Konngi ɗi ngalaa e saggitorde', pcm: 'Word(s) wey no dey for we dictionary' },
     unknownPhrase:{ fr: 'Tous les mots sont connus, mais cette tournure n’est pas encore validée par un locuteur natif.', ewo: 'Tournure ya nə́ ki validée', dua: 'Tournure e si validée', fub: 'Laawol haala ngal tabbitinaaka tawon', pcm: 'We sabi all the word, but native speaker never check this kind sentence yet.' },
     keptOriginal: { fr: 'Original conservé à l’identique', ewo: 'Ntɔ́ ńkɔ́ŋ', dua: 'Bosó ɓá ɓámbá', fub: 'Asli reenaama', pcm: 'We keep the original as e be' },
-    untranslatedCount: { fr: 'texte(s) pas encore traduit(s)', pcm: 'text(s) wey we never translate' },
-    missingSwitch:{ fr: 'Surligner les mots pas encore traduits', pcm: 'Show the word dem wey we never translate' },
-    pageDetected: { fr: 'Langue de la page détectée', pcm: 'Language wey this page dey use' },
-    automatic:    { fr: 'traduction automatique, sur cette page et les suivantes', pcm: 'we go translate automatic, this page and the next ones' },
-    chooseOnce:   { fr: 'Choisissez votre langue une seule fois : toutes les pages suivantes seront traduites automatiquement.', pcm: 'Choose your language one time: we go translate all the other pages automatic.' },
-    pageOther:    { fr: 'Cette page n’est ni en français ni en anglais : Mboa n’y touche pas.', pcm: 'This page no dey for French or English: Mboa no go touch am.' },
-    siteExcluded: { fr: 'Traduction désactivée sur ce site (à votre demande).', pcm: 'You don stop translation for this site.' },
-    siteOff:      { fr: 'Ne pas traduire', pcm: 'No translate' },
+    untranslatedCount: { fr: 'texte(s) pas encore traduit(s)', ewo: 'kalara ya ǹkóbó ayi bə', dua: 'kalati ya si ńtúbwa', fub: 'binndi ɗi firaaka tawon', pcm: 'text(s) wey we never translate' },
+    missingSwitch:{ fr: 'Surligner les mots pas encore traduits', ewo: 'Yěn bifia bi ǹkóbó ayi bə', dua: 'Ene mambo ma si ńtúbwa', fub: 'Holli konngi ɗi firaaka tawon', pcm: 'Show the word dem wey we never translate' },
+    pageDetected: { fr: 'Langue de la page détectée', ewo: 'Nkóbó ya kalara', dua: 'Bwambo ba kalati', fub: 'Ɗemngal hello ngo', pcm: 'Language wey this page dey use' },
+    automatic:    { fr: 'traduction automatique, sur cette page et les suivantes', ewo: 'traduction automatique, kalara ya ai bikalara bi ǒsú', dua: 'traduction automatique, kalati ni na kalati ɓɛ́sɛ̃', fub: 'firo jaaɓnirgo, hello ngo e ko rewi', pcm: 'we go translate automatic, this page and the next ones' },
+    chooseOnce:   { fr: 'Choisissez votre langue une seule fois : toutes les pages suivantes seront traduites automatiquement.', ewo: 'Tɔ́b nkóbó wɔ́ ngɔ́ fɔ́g: Mboa a kóbó bikalara mɛ́sɛ̌.', dua: 'Pɔ́sɔ bwambo bo ngɛ́ mɔ̂: Mboa e ma túbwa kalati ɓɛ́sɛ̃.', fub: 'Suɓo ɗemngal maa laawol gooto tan: Mboa firta hellooji fuu.', pcm: 'Choose your language one time: we go translate all the other pages automatic.' },
+    pageOther:    { fr: 'Cette page n’est ni en français ni en anglais : Mboa n’y touche pas.', ewo: 'Kalara ya nə́ ki a français ai anglais: Mboa a tébé.', dua: 'Kalati ni e si o français na anglais: Mboa e tímba.', fub: 'Hello ngo wonaa e faransi walla engeleere: Mboa memataa ngo.', pcm: 'This page no dey for French or English: Mboa no go touch am.' },
+    siteExcluded: { fr: 'Traduction désactivée sur ce site (à votre demande).', ewo: 'Ó nga tébé traduction a site ya.', dua: 'O tímbi traduction o site ni.', fub: 'A daroyii firo e site oo.', pcm: 'You don stop translation for this site.' },
+    siteOff:      { fr: 'Ne pas traduire', ewo: 'Ó kóbó ki', dua: 'O túbwa ɓé', fub: 'Wata fir', pcm: 'No translate' },
     listenLangs:  { fr: 'Écouter les langues', ewo: 'Wóg bikóbó', dua: 'Sengane mambo', fub: 'Heɗito ɗemɗe', pcm: 'Hear the languages' },
-    close:        { fr: 'Fermer', pcm: 'Close' },
-    collapse:     { fr: 'Réduire ou agrandir', pcm: 'Make am small or big' },
-    validated:    { fr: 'Validé', pcm: 'Checked' },
-    badgeDraft:   { fr: 'Brouillon', pcm: 'Draft' },
-    badgeReview:  { fr: 'En relecture', pcm: 'For review' },
-    autoVoiceLabel: { fr: 'Lire les alertes à voix haute', pcm: 'Read the warning dem loud' },
-    offline:      { fr: 'Hors ligne · aucune donnée envoyée', pcm: 'Offline · we no send any data' },
-    statTranslated: { fr: 'textes traduits', pcm: 'text wey we translate' },
-    statGist:     { fr: 'en sens général', pcm: 'for general meaning' },
-    statRejected: { fr: 'refusés par le contrôle d’intégrité', pcm: 'wey the check refuse' },
+    region:       { fr: 'Votre région', ewo: 'Nnam wɔ́', dua: 'Mbóa mwáó', fub: 'Diiwaan maa', pcm: 'Your region' },
+    allRegions:   { fr: 'Toutes', ewo: 'Mɛ́sɛ̌', dua: 'Ɓɛ́sɛ̃', fub: 'Fuu', pcm: 'All' },
+    close:        { fr: 'Fermer', ewo: 'Díb', dua: 'Díba', fub: 'Uddu', pcm: 'Close' },
+    collapse:     { fr: 'Réduire ou agrandir', ewo: 'Nnɛ̂n ai ńtɛ̂k', dua: 'Ndé na ɓúkí', fub: 'Ustu walla ɓeydu', pcm: 'Make am small or big' },
+    validated:    { fr: 'Validé', ewo: 'Mvaé', dua: 'Bwam', fub: 'Tabbitinaama', pcm: 'Checked' },
+    badgeDraft:   { fr: 'Brouillon', ewo: 'Brouillon', dua: 'Brouillon', fub: 'Brouillon', pcm: 'Draft' },
+    badgeReview:  { fr: 'En relecture', ewo: 'Relecture', dua: 'Relecture', fub: 'Ina ƴeewee', pcm: 'For review' },
+    autoVoiceLabel: { fr: 'Lire les alertes à voix haute', ewo: 'Lá bikalara bi yěn ai kíŋ', dua: 'Langa mabɔ́ŋgɔ́ na kíŋ', fub: 'Janng reenuuji e hoolo', pcm: 'Read the warning dem loud' },
+    offline:      { fr: 'Hors ligne · aucune donnée envoyée', ewo: 'Hors ligne · Mboa a lóm ki dzam', dua: 'Hors ligne · Mboa e si lóma bwambo', fub: 'Hors ligne · Mboa neldataa hay huunde', pcm: 'Offline · we no send any data' },
+    statTranslated: { fr: 'textes traduits', ewo: 'bikalara bi nga kóbó', dua: 'kalati ya ńtúbwa', fub: 'binndi firaaɗi', pcm: 'text wey we translate' },
+    statGist:     { fr: 'en sens général', ewo: 'sens général', dua: 'sens général', fub: 'maana tan', pcm: 'for general meaning' },
+    statRejected: { fr: 'refusés par le contrôle d’intégrité', ewo: 'bi ŋkɔ́ŋ a nga tébé', dua: 'ŋkɔ́ŋ e tímbi', fub: 'kisal haɗii', pcm: 'wey the check refuse' },
     shield:       { fr: 'Bouclier anti-arnaque', ewo: 'Ŋkɔ́ŋ ntɔ̂ŋ', dua: 'Ŋkɔ́ŋ', fub: 'Kisal', pcm: 'Scam shield' },
     guide:        { fr: 'Guide pas à pas', ewo: 'Nlɔ̂ŋ', dua: 'Ndolo', fub: 'Ardoowo', pcm: 'Step by step guide' },
     voice:        { fr: 'Voix', ewo: 'Kíŋ', dua: 'Kíŋ', fub: 'Hoolo', pcm: 'Voice' },

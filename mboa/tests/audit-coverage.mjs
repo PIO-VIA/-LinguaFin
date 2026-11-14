@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const EXT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const URL = process.env.MBOA_URL || 'https://safinum.cm/hackathon-test';
 const LANG = process.env.MBOA_LANG || 'ewo';
-const EXE = process.env.CHROMIUM || path.join(os.homedir(), '.cache/ms-playwright/chromium-1248/chrome-linux64/chrome');
+const EXE = process.env.CHROMIUM || chromium.executablePath(); // navigateur installé par « npx playwright install chromium »
 const ctx = await chromium.launchPersistentContext(fs.mkdtempSync(path.join(os.tmpdir(), 'mboa-a-')), {
   executablePath: EXE, headless: true, viewport: { width: 1366, height: 900 },
   args: [`--disable-extensions-except=${EXT}`, `--load-extension=${EXT}`] });

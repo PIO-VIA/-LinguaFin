@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const EXT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEMO = path.join(EXT, '../mboa-demo/index.html');
 const [url0, LANG = 'ewo'] = process.argv.slice(2);
-const EXE = path.join(os.homedir(), '.cache/ms-playwright/chromium-1248/chrome-linux64/chrome');
+const EXE = process.env.CHROMIUM || chromium.executablePath(); // navigateur installé par « npx playwright install chromium »
 const server = http.createServer((q, r) => { r.writeHead(200, { 'content-type': 'text/html; charset=utf-8' }); fs.createReadStream(DEMO).pipe(r); }).listen(0, '127.0.0.1');
 await new Promise((r) => server.once('listening', r));
 const url = url0 || `http://127.0.0.1:${server.address().port}/`;

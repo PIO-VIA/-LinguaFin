@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const EXT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const EXE = process.env.CHROMIUM || path.join(os.homedir(), '.cache/ms-playwright/chromium-1248/chrome-linux64/chrome');
+const EXE = process.env.CHROMIUM || chromium.executablePath(); // navigateur installé par « npx playwright install chromium »
 const ctx = await chromium.launchPersistentContext(fs.mkdtempSync(path.join(os.tmpdir(), 'mboa-pages-')), {
   executablePath: EXE, headless: true, args: [`--disable-extensions-except=${EXT}`, `--load-extension=${EXT}`],
 });

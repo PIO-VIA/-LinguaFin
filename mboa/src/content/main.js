@@ -4,7 +4,7 @@
   if (globalThis.__mboaStarted) return;
   globalThis.__mboaStarted = true;
 
-  const DEFAULTS = { lang: 'off', shield: true, guide: true, autoVoice: false, tips: true, missing: true, firstRun: true, lastLang: 'ewo', excluded: [] };
+  const DEFAULTS = { lang: 'off', shield: true, guide: true, autoVoice: false, tips: true, missing: true, firstRun: true, lastLang: 'ewo', excluded: [], region: '' };
   const HOST = location.hostname;
   let page = { lang: null, declared: null }; // langue détectée de la page (fr / en / null)
   let lastDetect = 0;

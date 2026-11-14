@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EXT = path.resolve(HERE, '..');
 const DEMO = path.resolve(HERE, '../../mboa-demo/index.html');
-const EXE = process.env.CHROMIUM || path.join(os.homedir(), '.cache/ms-playwright/chromium-1248/chrome-linux64/chrome');
+const EXE = process.env.CHROMIUM || chromium.executablePath(); // navigateur installé par « npx playwright install chromium »
 const locale = process.argv[2] ? `${process.argv[2]}-CM` : 'fr-FR';
 
 const server = http.createServer((req, res) => {

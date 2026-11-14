@@ -11,7 +11,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EXT = path.resolve(HERE, '..');
 const DEMO = path.resolve(HERE, '../../mboa-demo');
 const OUT = process.env.MBOA_OUT || path.join(os.tmpdir(), 'mboa-e2e-local');
-const EXE = process.env.CHROMIUM || path.join(os.homedir(), '.cache/ms-playwright/chromium-1248/chrome-linux64/chrome');
+const EXE = process.env.CHROMIUM || chromium.executablePath(); // navigateur installé par « npx playwright install chromium »
 fs.mkdirSync(OUT, { recursive: true });
 
 const server = http.createServer((req, res) => {
@@ -111,6 +111,19 @@ await sw.evaluate(() => chrome.storage.sync.set({ lang: 'off' }));
 await page.waitForTimeout(600);
 t = await text();
 check('Bascule « Original » : texte français restauré', /Solde disponible/.test(t) && /Bonjour, Paul Atangana/.test(t));
+
+// D. Choix par région : la liste se réduit aux langues de la région + celles parlées partout.
+const hostEl = (s) => page.locator('#mboa-host').locator(s);
+await hostEl('.fab').click();
+await page.waitForTimeout(200);
+await hostEl('[data-region="Littoral"]').click();
+await page.waitForTimeout(300);
+const rows = await hostEl('.lrow[data-row]').evaluateAll((els) => els.map((e) => e.dataset.row).join(','));
+check('Région « Littoral » : seulement Duala, Pidgin, Français', rows === 'dua,pcm,fr', rows);
+await hostEl('[data-region=""]').click();
+await page.waitForTimeout(300);
+const all = await hostEl('.lrow[data-row]').count();
+check('Région « Toutes » : liste complète', all === 5, String(all));
 
 check('Aucune erreur JavaScript', errors.length === 0, errors.slice(0, 3).join(' | '));
 await ctx.close();

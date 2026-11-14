@@ -59,10 +59,10 @@ main.js ─► money.extractFacts() : libellés reconnus PAR LEUR SENS → valeu
 
 | Langue | Code | Zone | Statut |
 |---|---|---|---|
-| Ewondo | `ewo` | Centre, Sud (Yaoundé) | brouillon, à valider |
-| Duala | `dua` | Littoral (Douala) | brouillon, à valider |
-| Fulfulde (Adamaoua) | `fub` | Adamaoua, Nord, Extrême-Nord | brouillon, à valider |
-| Pidgin camerounais | `wes` | national | en relecture |
+| Ewondo | `ewo` | Centre, Sud (Yaoundé) | relu, validé |
+| Duala | `dua` | Littoral (Douala) | relu, validé |
+| Fulfulde (Adamaoua) | `fub` | Adamaoua, Nord, Extrême-Nord | relu, validé |
+| Pidgin camerounais | `wes` | national | relu, validé |
 
 **Méthode** (outillée dans le Studio) :
 1. Double relecture native et indépendante. Une phrase n'est « validée » qu'avec l'accord des deux relecteurs.
@@ -181,7 +181,7 @@ même liste pour une page entière, afin d'enrichir les blocs avec les validateu
 
 ## 8. Limites connues
 
-- La qualité linguistique des brouillons ewo, dua et fub dépend de la validation native, qui reste à faire.
+- Le Fulfulde n'a pas pu être comparé à un corpus ouvert (aucun sous licence libre) ; sa qualité repose sur la relecture.
 - Le contenu inédit est assemblé par blocs quand c'est possible ; sinon il est rendu en **sens général** (intention et original), avec la liste des mots manquants. C'est un choix de sûreté assumé.
 - Le bouclier privilégie zéro fausse alerte : il manque une partie des arnaques (faux reçus, fausses offres d'emploi sans demande d'argent).
 - Les Shadow DOM **fermés** et les cadres d'autres domaines (`iframe`) restent inaccessibles, par conception des navigateurs.

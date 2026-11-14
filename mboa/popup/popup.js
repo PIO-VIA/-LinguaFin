@@ -12,7 +12,7 @@ async function render() {
     b.setAttribute('aria-checked', String(lang === code));
     b.style.setProperty('--c', p?.color || '#0f766e');
     if (!p) b.className = 'off';
-    M.util.setHTML(b, `<span class="radio" aria-hidden="true"></span><span class="txt"${p ? ` lang="${p.bcp47}"` : ''}><b></b>${p ? '<small></small>' : ''}</span>${p && p.status !== 'source' ? `<span class="badge">${p.status === 'draft' ? 'Brouillon' : 'En relecture'}</span>` : ''}`);
+    M.util.setHTML(b, `<span class="radio" aria-hidden="true"></span><span class="txt"${p ? ` lang="${p.bcp47}"` : ''}><b></b>${p ? '<small></small>' : ''}</span>${p && (p.status === 'draft' || p.status === 'review') ? `<span class="badge">${p.status === 'draft' ? 'Brouillon' : 'En relecture'}</span>` : ''}`);
     b.querySelector('b').textContent = p ? p.native : 'Original (sans traduction)';
     if (p) b.querySelector('small').textContent = p.sample;
     b.onclick = async () => {
